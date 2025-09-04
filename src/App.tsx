@@ -17,6 +17,14 @@ import {
   SelectValue,
 } from '@/components/ui/select.tsx'
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table.tsx'
 
 type FormData = {
   description: string
@@ -25,21 +33,25 @@ type FormData = {
 }
 
 function App() {
-  const { register, handleSubmit, control } = useForm<FormData>({
+  const { register, handleSubmit, control, reset } = useForm<FormData>({
     defaultValues: {
       description: '',
       sum: 0,
       type: '',
     },
   })
+
   const [showForm, setShowForm] = useState<boolean>(false)
+  const [transactions, setTransaction] = useState<FormData[]>([])
 
   const toggleShowForm = () => {
     setShowForm(prev => !prev)
   }
 
   const hamdleSubmit: SubmitHandler<FormData> = data => {
-    console.log(data)
+    setTransaction(prev => [...prev, data])
+    reset()
+    setShowForm(false)
   }
 
   return (
@@ -97,7 +109,42 @@ function App() {
             </form>
           ) : (
             <div>
-              <Label>Список транзакцій:</Label>
+              <Label className="mb-4">Список транзакцій</Label>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-[150px]">Опис</TableHead>
+                    <TableHead>Тип</TableHead>
+                    <TableHead className="text-right">Сума</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {transactions.length === 0 ? (
+                    <TableRow>
+                      <TableCell
+                        colSpan={3}
+                        className="text-center text-gray-500"
+                      >
+                        Немає транзакцій
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    transactions.map((transaction, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">
+                          {transaction.description}
+                        </TableCell>
+                        <TableCell>
+                          {transaction.type === 'income' ? 'Дохід' : 'Витрата'}
+                        </TableCell>
+                        <TableCell className="text-right">
+                          {transaction.sum} грн
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </TableBody>
+              </Table>
             </div>
           )}
         </CardContent>
