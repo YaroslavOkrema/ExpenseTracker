@@ -17,6 +17,9 @@ function CardComponent() {
     showForm,
     setTransaction,
     setShowForm,
+    income,
+    expenses,
+    balance,
   } = useCardPage()
 
   return (
@@ -24,10 +27,10 @@ function CardComponent() {
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-center">Мій бюджет</CardTitle>
-          <Label>Баланс: 3500 грн</Label>
+          <Label>Баланс: {balance} грн</Label>
           <div className="flex gap-4 mb-4">
-            <Label>Доходи: 5000 грн</Label>
-            <Label>Витрати: 3500 грн</Label>
+            <Label>Доходи: {income} грн</Label>
+            <Label>Витрати: {expenses} грн</Label>
           </div>
           <Button
             className="cursor-pointer"
