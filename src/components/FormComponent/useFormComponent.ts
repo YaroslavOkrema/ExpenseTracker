@@ -13,8 +13,13 @@ export const useFormComponent = ({
   })
 
   const hamdleSubmit: SubmitHandler<Data> = data => {
+    const newTransaction: Data = {
+      ...data,
+      id: crypto.randomUUID(),
+    }
+
     setTransaction(prev => {
-      const transaction = [...prev, data]
+      const transaction = [...prev, newTransaction]
 
       saveTransactions(transaction)
 

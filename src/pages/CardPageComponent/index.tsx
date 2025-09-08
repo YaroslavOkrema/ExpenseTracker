@@ -26,6 +26,7 @@ function CardPageComponent() {
     income,
     expenses,
     balance,
+    removeTransactions,
   } = useCardPageComponent()
 
   return (
@@ -62,7 +63,10 @@ function CardPageComponent() {
                 ) : (
                   <div>
                     <Label className="mb-4">Список транзакцій</Label>
-                    <TableComponent transactions={transactions} />
+                    <TableComponent
+                      transactions={transactions}
+                      removeTransaction={removeTransactions}
+                    />
                   </div>
                 )}
               </CardContent>

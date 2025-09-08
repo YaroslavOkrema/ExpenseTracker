@@ -4,7 +4,10 @@ import {
   calculateExpense,
   calculateIncome,
 } from '@/pages/CardPageComponent/helpers.ts'
-import { getTransactions } from '@/utils/localeStorage/localeStorage.ts'
+import {
+  getTransactions,
+  saveTransactions,
+} from '@/utils/localeStorage/localeStorage.ts'
 
 export const useCardPageComponent = () => {
   const [showForm, setShowForm] = useState<boolean>(false)
@@ -26,6 +29,14 @@ export const useCardPageComponent = () => {
     }
   }, [transactions])
 
+  const removeTransactions = (id: string | number): void => {
+    const removeTransaction = transactions.filter(
+      transaction => transaction.id !== id,
+    )
+    setTransaction(removeTransaction)
+    saveTransactions(removeTransaction)
+  }
+
   return {
     showForm,
     setShowForm,
@@ -35,5 +46,6 @@ export const useCardPageComponent = () => {
     income,
     expenses,
     balance,
+    removeTransactions,
   }
 }

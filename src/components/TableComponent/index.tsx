@@ -9,15 +9,20 @@ import {
 import type { TableComponentProps } from '@/components/TableComponent/types.ts'
 import type { JSX } from 'react'
 import { TransactionType } from '@/types/enums.ts'
+import { Button } from '@/components/ui/button.tsx'
+import { Trash2 } from 'lucide-react'
 
-function TableComponent({ transactions }: TableComponentProps): JSX.Element {
+function TableComponent({
+  transactions,
+  removeTransaction,
+}: TableComponentProps): JSX.Element {
   return (
     <Table>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[150px]">Опис</TableHead>
           <TableHead>Тип</TableHead>
-          <TableHead className="text-right">Сума</TableHead>
+          <TableHead className="text-left">Сума</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -40,6 +45,15 @@ function TableComponent({ transactions }: TableComponentProps): JSX.Element {
               </TableCell>
               <TableCell className="text-right">
                 {transaction.sum} грн
+              </TableCell>
+              <TableCell>
+                <Button
+                  variant="link"
+                  className="cursor-pointer hover:text-red-500"
+                  onClick={() => removeTransaction(transaction.id)}
+                >
+                  <Trash2 size={3} />
+                </Button>
               </TableCell>
             </TableRow>
           ))
