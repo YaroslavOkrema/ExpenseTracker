@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button.tsx'
 import type { FormProps } from '@/components/FormComponent/types.ts'
 import { useFormComponent } from '@/components/FormComponent/useFormComponent.ts'
 import type { JSX } from 'react'
+import { TransactionType } from '@/types/enums.ts'
 
 function FormComponent({
   setShowForm,
@@ -44,8 +45,8 @@ function FormComponent({
               <SelectValue placeholder="Дохід" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="income">Дохід</SelectItem>
-              <SelectItem value="expense">Витрата</SelectItem>
+              <SelectItem value={TransactionType.INCOME}>Дохід</SelectItem>
+              <SelectItem value={TransactionType.EXPENSE}>Витрата</SelectItem>
             </SelectContent>
           </Select>
         )}

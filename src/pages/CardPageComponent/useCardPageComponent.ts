@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
 import type { Data } from '@/types/types.ts'
+import { TransactionType } from '@/types/enums.ts'
 
-export const useCardPage = () => {
+export const useCardPageComponent = () => {
   const [showForm, setShowForm] = useState<boolean>(false)
   const [transactions, setTransaction] = useState<Data[]>([])
 
@@ -9,14 +10,22 @@ export const useCardPage = () => {
     setShowForm(prev => !prev)
   }
 
-  const { income, expenses, balance } = useMemo(() => {
-    const income = transactions
-      .filter(transaction => transaction.type === 'income')
+  function calculateIncome(transactions: Data[]): number {
+    return transactions
+      .filter(transaction => transaction.type === TransactionType.INCOME)
       .reduce((sum, transaction) => sum + Number(transaction.sum), 0)
+  }
 
-    const expenses = transactions
-      .filter(transaction => transaction.type === 'expense')
+  function calculateExpense(transactions: Data[]): number {
+    return transactions
+      .filter(transaction => transaction.type === TransactionType.EXPENSE)
       .reduce((sum, transaction) => sum + Number(transaction.sum), 0)
+  }
+
+  const { income, expenses, balance } = useMemo(() => {
+    const income = calculateIncome(transactions)
+
+    const expenses = calculateExpense(transactions)
 
     return {
       income,

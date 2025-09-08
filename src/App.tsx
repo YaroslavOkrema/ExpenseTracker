@@ -1,9 +1,8 @@
 import './App.css'
-
-import CardComponent from '@/pages/CardPage'
+import CardPageComponent from '@/pages/CardPageComponent'
 
 function App() {
-  return <CardComponent />
+  return <CardPageComponent />
 }
 
 export default App

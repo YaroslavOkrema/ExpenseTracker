@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import FormComponent from '@/components/FormComponent'
 import TableComponent from '@/components/TableComponent'
-import { useCardPage } from '@/pages/CardPage/useCardPage.ts'
+import { useCardPageComponent } from '@/pages/CardPageComponent/useCardPageComponent.ts'
 import {
   Tabs,
   TabsContent,
@@ -16,7 +16,7 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs.tsx'
 
-function CardComponent() {
+function CardPageComponent() {
   const {
     transactions,
     toggleShowForm,
@@ -26,7 +26,7 @@ function CardComponent() {
     income,
     expenses,
     balance,
-  } = useCardPage()
+  } = useCardPageComponent()
 
   return (
     <div className="flex justify-center items-center">
@@ -84,4 +84,4 @@ function CardComponent() {
   )
 }
 
-export default CardComponent
+export default CardPageComponent

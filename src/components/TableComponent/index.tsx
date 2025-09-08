@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/table.tsx'
 import type { TableComponentProps } from '@/components/TableComponent/types.ts'
 import type { JSX } from 'react'
+import { TransactionType } from '@/types/enums.ts'
 
 function TableComponent({ transactions }: TableComponentProps): JSX.Element {
   return (
@@ -27,13 +28,15 @@ function TableComponent({ transactions }: TableComponentProps): JSX.Element {
             </TableCell>
           </TableRow>
         ) : (
-          transactions.map((transaction, index) => (
-            <TableRow key={index}>
+          transactions.map(transaction => (
+            <TableRow key={transaction.description}>
               <TableCell className="font-medium">
                 {transaction.description}
               </TableCell>
               <TableCell>
-                {transaction.type === 'income' ? 'Дохід' : 'Витрата'}
+                {transaction.type === TransactionType.INCOME
+                  ? 'Дохід'
+                  : 'Витрата'}
               </TableCell>
               <TableCell className="text-right">
                 {transaction.sum} грн
