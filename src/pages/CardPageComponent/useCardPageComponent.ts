@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { Data } from '@/types/types.ts'
 import {
   calculateExpense,
@@ -37,6 +37,33 @@ export const useCardPageComponent = () => {
     saveTransactions(removeTransaction)
   }
 
+  const itemsPerPage = 4
+  const [page, setPage] = useState(1)
+  const totalPages = Math.ceil(transactions.length / itemsPerPage)
+
+  const startIndex = (page - 1) * itemsPerPage
+  const paginatedTransactions = transactions.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  )
+
+  const handlePageChange = (newPage: number): void => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setPage(newPage)
+    }
+  }
+
+  const pageNumbers = useMemo(
+    () => Array.from({ length: totalPages }, (_, i) => i + 1),
+    [totalPages],
+  )
+
+  useEffect(() => {
+    if (page > totalPages) {
+      setPage(1)
+    }
+  }, [page, totalPages])
+
   return {
     showForm,
     setShowForm,
@@ -47,5 +74,10 @@ export const useCardPageComponent = () => {
     expenses,
     balance,
     removeTransactions,
+    paginatedTransactions,
+    handlePageChange,
+    page,
+    totalPages,
+    pageNumbers,
   }
 }

@@ -15,10 +15,17 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs.tsx'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination.tsx'
 
 function CardPageComponent() {
   const {
-    transactions,
     toggleShowForm,
     showForm,
     setTransaction,
@@ -27,6 +34,10 @@ function CardPageComponent() {
     expenses,
     balance,
     removeTransactions,
+    paginatedTransactions,
+    handlePageChange,
+    page,
+    pageNumbers,
   } = useCardPageComponent()
 
   return (
@@ -40,17 +51,15 @@ function CardPageComponent() {
           <TabsContent value="expense">
             <Card className="w-full max-w-sm">
               <CardHeader>
-                <CardTitle className="text-center">Мій бюджет</CardTitle>
-                <Label>Баланс: {balance} грн</Label>
+                <CardTitle className="text-center text-xl">
+                  Мій бюджет
+                </CardTitle>
+                <Label className="text-lg">Баланс: {balance} грн</Label>
                 <div className="flex gap-4 mb-4">
-                  <Label>Доходи: {income} грн</Label>
-                  <Label>Витрати: {expenses} грн</Label>
+                  <Label className="text-base">Доходи: {income} грн</Label>
+                  <Label className="text-base">Витрати: {expenses} грн</Label>
                 </div>
-                <Button
-                  className="cursor-pointer"
-                  variant="link"
-                  onClick={toggleShowForm}
-                >
+                <Button className="cursor-pointer" onClick={toggleShowForm}>
                   {showForm ? 'Закрити' : 'Додати транзакцію'}
                 </Button>
               </CardHeader>
@@ -64,9 +73,45 @@ function CardPageComponent() {
                   <div>
                     <Label className="mb-4">Список транзакцій</Label>
                     <TableComponent
-                      transactions={transactions}
+                      transactions={paginatedTransactions}
                       removeTransaction={removeTransactions}
                     />
+                    <Pagination className="mt-4">
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious
+                            href="#"
+                            onClick={e => {
+                              e.preventDefault()
+                              handlePageChange(page - 1)
+                            }}
+                          />
+                        </PaginationItem>
+                        {pageNumbers.map(num => (
+                          <PaginationItem key={num}>
+                            <PaginationLink
+                              href="#"
+                              isActive={page === num}
+                              onClick={e => {
+                                e.preventDefault()
+                                handlePageChange(num)
+                              }}
+                            >
+                              {num}
+                            </PaginationLink>
+                          </PaginationItem>
+                        ))}
+                        <PaginationItem>
+                          <PaginationNext
+                            href="#"
+                            onClick={e => {
+                              e.preventDefault()
+                              handlePageChange(page + 1)
+                            }}
+                          />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
                   </div>
                 )}
               </CardContent>
