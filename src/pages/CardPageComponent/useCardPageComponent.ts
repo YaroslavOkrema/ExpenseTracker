@@ -8,10 +8,25 @@ import {
   getTransactions,
   saveTransactions,
 } from '@/utils/localeStorage/localeStorage.ts'
+import * as React from 'react'
+import {
+  DEFAULT_PAGE,
+  ITEMS_PER_PAGE,
+} from '@/pages/CardPageComponent/constants.ts'
 
 export const useCardPageComponent = () => {
   const [showForm, setShowForm] = useState<boolean>(false)
   const [transactions, setTransaction] = useState<Data[]>(getTransactions())
+  const [page, setPage] = useState<number>(DEFAULT_PAGE)
+
+  const totalPages = Math.ceil(transactions.length / ITEMS_PER_PAGE)
+
+  const startIndex = (page - DEFAULT_PAGE) * ITEMS_PER_PAGE
+
+  const paginatedTransactions = transactions.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE,
+  )
 
   const toggleShowForm = (): void => {
     setShowForm(prev => !prev)
@@ -37,20 +52,32 @@ export const useCardPageComponent = () => {
     saveTransactions(removeTransaction)
   }
 
-  const itemsPerPage = 4
-  const [page, setPage] = useState(1)
-  const totalPages = Math.ceil(transactions.length / itemsPerPage)
-
-  const startIndex = (page - 1) * itemsPerPage
-  const paginatedTransactions = transactions.slice(
-    startIndex,
-    startIndex + itemsPerPage,
-  )
-
   const handlePageChange = (newPage: number): void => {
-    if (newPage >= 1 && newPage <= totalPages) {
+    if (newPage >= DEFAULT_PAGE && newPage <= totalPages) {
       setPage(newPage)
     }
+  }
+
+  const handlePrevClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+  ): void => {
+    event.preventDefault()
+    handlePageChange(page - DEFAULT_PAGE)
+  }
+
+  const handleNextClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+  ): void => {
+    event.preventDefault()
+    handlePageChange(page + DEFAULT_PAGE)
+  }
+
+  const handleNumberClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    number: number,
+  ): void => {
+    event.preventDefault()
+    handlePageChange(number)
   }
 
   const pageNumbers = useMemo(
@@ -60,7 +87,7 @@ export const useCardPageComponent = () => {
 
   useEffect(() => {
     if (page > totalPages) {
-      setPage(1)
+      setPage(DEFAULT_PAGE)
     }
   }, [page, totalPages])
 
@@ -79,5 +106,8 @@ export const useCardPageComponent = () => {
     page,
     totalPages,
     pageNumbers,
+    handlePrevClick,
+    handleNextClick,
+    handleNumberClick,
   }
 }

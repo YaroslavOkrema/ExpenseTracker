@@ -15,14 +15,8 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs.tsx'
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@/components/ui/pagination.tsx'
+
+import PaginationComponent from '@/components/PaginationComponent/PaginationComponent.tsx'
 
 function CardPageComponent() {
   const {
@@ -35,9 +29,11 @@ function CardPageComponent() {
     balance,
     removeTransactions,
     paginatedTransactions,
-    handlePageChange,
     page,
     pageNumbers,
+    handleNextClick,
+    handlePrevClick,
+    handleNumberClick,
   } = useCardPageComponent()
 
   return (
@@ -76,42 +72,13 @@ function CardPageComponent() {
                       transactions={paginatedTransactions}
                       removeTransaction={removeTransactions}
                     />
-                    <Pagination className="mt-4">
-                      <PaginationContent>
-                        <PaginationItem>
-                          <PaginationPrevious
-                            href="#"
-                            onClick={e => {
-                              e.preventDefault()
-                              handlePageChange(page - 1)
-                            }}
-                          />
-                        </PaginationItem>
-                        {pageNumbers.map(num => (
-                          <PaginationItem key={num}>
-                            <PaginationLink
-                              href="#"
-                              isActive={page === num}
-                              onClick={e => {
-                                e.preventDefault()
-                                handlePageChange(num)
-                              }}
-                            >
-                              {num}
-                            </PaginationLink>
-                          </PaginationItem>
-                        ))}
-                        <PaginationItem>
-                          <PaginationNext
-                            href="#"
-                            onClick={e => {
-                              e.preventDefault()
-                              handlePageChange(page + 1)
-                            }}
-                          />
-                        </PaginationItem>
-                      </PaginationContent>
-                    </Pagination>
+                    <PaginationComponent
+                      page={page}
+                      pageNumbers={pageNumbers}
+                      handlePrevClick={handlePrevClick}
+                      handleNextClick={handleNextClick}
+                      handleNumberClick={handleNumberClick}
+                    />
                   </div>
                 )}
               </CardContent>
