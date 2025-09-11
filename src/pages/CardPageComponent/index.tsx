@@ -17,12 +17,7 @@ import {
 } from '@/components/ui/tabs.tsx'
 
 import PaginationComponent from '@/components/PaginationComponent/PaginationComponent.tsx'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu.tsx'
+import ThemeSelect from '@/components/ThemeSelect'
 
 function CardPageComponent() {
   const {
@@ -107,13 +102,7 @@ function CardPageComponent() {
                 <CardTitle>Налаштування</CardTitle>
               </CardHeader>
               <CardContent>
-                <DropdownMenu>
-                  <DropdownMenuTrigger>Open</DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem>Dark</DropdownMenuItem>
-                    <DropdownMenuItem>Light</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <ThemeSelect />
               </CardContent>
             </Card>
           </TabsContent>
