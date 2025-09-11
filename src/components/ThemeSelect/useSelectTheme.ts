@@ -1,5 +1,5 @@
-import { useTheme } from '@/providers/theme'
 import { Theme } from '@/types/enums.ts'
+import { useTheme } from '@/hooks/useTheme.ts'
 
 export function useSelectTheme() {
   const { setTheme } = useTheme()
