@@ -17,6 +17,12 @@ import {
 } from '@/components/ui/tabs.tsx'
 
 import PaginationComponent from '@/components/PaginationComponent/PaginationComponent.tsx'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu.tsx'
 
 function CardPageComponent() {
   const {
@@ -43,6 +49,7 @@ function CardPageComponent() {
           <TabsList>
             <TabsTrigger value="expense">Expense Tracker</TabsTrigger>
             <TabsTrigger value="analytics">Аналітика</TabsTrigger>
+            <TabsTrigger value="settings">Налаштування</TabsTrigger>
           </TabsList>
           <TabsContent value="expense">
             <Card className="w-full max-w-sm">
@@ -91,6 +98,22 @@ function CardPageComponent() {
               </CardHeader>
               <CardContent>
                 <div>Soon...</div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="settings">
+            <Card className="w-full max-w-sm">
+              <CardHeader>
+                <CardTitle>Налаштування</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <DropdownMenu>
+                  <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem>Dark</DropdownMenuItem>
+                    <DropdownMenuItem>Light</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </CardContent>
             </Card>
           </TabsContent>
