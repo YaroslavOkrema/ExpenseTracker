@@ -18,6 +18,7 @@ import {
 
 import PaginationComponent from '@/components/PaginationComponent/PaginationComponent.tsx'
 import ThemeSelect from '@/components/ThemeSelect'
+import AnalyticsComponent from '@/components/AnalyticsComponent'
 
 function CardPageComponent() {
   const {
@@ -35,6 +36,10 @@ function CardPageComponent() {
     handleNextClick,
     handlePrevClick,
     handleNumberClick,
+    expenseRatio,
+    savingRates,
+    maxIncome,
+    maxExpense,
   } = useCardPageComponent()
 
   return (
@@ -49,14 +54,10 @@ function CardPageComponent() {
           <TabsContent value="expense">
             <Card className="w-full max-w-sm">
               <CardHeader>
-                <CardTitle className="text-center text-xl">
+                <CardTitle className="text-center text-xl mb-4">
                   Мій бюджет
                 </CardTitle>
-                <Label className="text-lg">Баланс: {balance} грн</Label>
-                <div className="flex gap-4 mb-4">
-                  <Label className="text-base">Доходи: {income} грн</Label>
-                  <Label className="text-base">Витрати: {expenses} грн</Label>
-                </div>
+                <Label className="text-lg mb-4">Баланс: {balance} грн</Label>
                 <Button className="cursor-pointer" onClick={toggleShowForm}>
                   {showForm ? 'Закрити' : 'Додати транзакцію'}
                 </Button>
@@ -89,10 +90,17 @@ function CardPageComponent() {
           <TabsContent value="analytics">
             <Card className="w-full max-w-sm">
               <CardHeader>
-                <CardTitle>Login to your account</CardTitle>
+                <CardTitle>Аналітика</CardTitle>
               </CardHeader>
               <CardContent>
-                <div>Soon...</div>
+                <AnalyticsComponent
+                  income={income}
+                  expenses={expenses}
+                  expenseRatio={expenseRatio}
+                  savingRates={savingRates}
+                  maxIncome={maxIncome}
+                  maxExpense={maxExpense}
+                />
               </CardContent>
             </Card>
           </TabsContent>

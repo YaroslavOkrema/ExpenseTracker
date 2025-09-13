@@ -2,7 +2,11 @@ import { useEffect, useMemo, useState } from 'react'
 import type { Data } from '@/types/types.ts'
 import {
   calculateExpense,
+  calculateExpenseRatio,
   calculateIncome,
+  calculateMaxExpense,
+  calculateMaxIncome,
+  calculateSavingRates,
 } from '@/pages/CardPageComponent/helpers.ts'
 import {
   getTransactions,
@@ -32,15 +36,37 @@ export const useCardPageComponent = () => {
     setShowForm(prev => !prev)
   }
 
-  const { income, expenses, balance } = useMemo(() => {
+  const {
+    income,
+    expenses,
+    balance,
+    expenseRatio,
+    savingRates,
+    maxIncome,
+    maxExpense,
+  } = useMemo(() => {
     const income = calculateIncome(transactions)
 
     const expenses = calculateExpense(transactions)
 
+    const balance = income - expenses
+
+    const expenseRatio = calculateExpenseRatio(income, expenses)
+
+    const savingRates = calculateSavingRates(income, balance)
+
+    const maxIncome = calculateMaxIncome(transactions)
+
+    const maxExpense = calculateMaxExpense(transactions)
+
     return {
       income,
       expenses,
-      balance: income - expenses,
+      balance,
+      expenseRatio,
+      savingRates,
+      maxIncome,
+      maxExpense,
     }
   }, [transactions])
 
@@ -109,5 +135,9 @@ export const useCardPageComponent = () => {
     handlePrevClick,
     handleNextClick,
     handleNumberClick,
+    expenseRatio,
+    savingRates,
+    maxIncome,
+    maxExpense,
   }
 }
