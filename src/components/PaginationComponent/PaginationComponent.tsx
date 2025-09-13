@@ -19,7 +19,10 @@ function PaginationComponent({
     <Pagination className="mt-4">
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious onClick={handlePrevClick} />
+          <PaginationPrevious
+            className="cursor-pointer"
+            onClick={handlePrevClick}
+          />
         </PaginationItem>
         {pageNumbers.map(num => (
           <PaginationItem key={num}>
@@ -32,7 +35,10 @@ function PaginationComponent({
           </PaginationItem>
         ))}
         <PaginationItem>
-          <PaginationNext onClick={handleNextClick} />
+          <PaginationNext
+            className="cursor-pointer"
+            onClick={handleNextClick}
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

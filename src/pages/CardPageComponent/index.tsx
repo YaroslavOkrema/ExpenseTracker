@@ -19,6 +19,7 @@ import {
 import PaginationComponent from '@/components/PaginationComponent/PaginationComponent.tsx'
 import ThemeSelect from '@/components/ThemeSelect'
 import AnalyticsComponent from '@/components/AnalyticsComponent'
+import { formatNumbers } from '@/utils/formatNumbers/formatNumbers.ts'
 
 function CardPageComponent() {
   const {
@@ -57,7 +58,9 @@ function CardPageComponent() {
                 <CardTitle className="text-center text-xl mb-4">
                   Мій бюджет
                 </CardTitle>
-                <Label className="text-lg mb-4">Баланс: {balance} грн</Label>
+                <div className="text-4xl text-center mb-4">
+                  {formatNumbers(balance)} ₴
+                </div>
                 <Button className="cursor-pointer" onClick={toggleShowForm}>
                   {showForm ? 'Закрити' : 'Додати транзакцію'}
                 </Button>

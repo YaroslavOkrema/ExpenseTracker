@@ -3,3 +3,5 @@ export const DEFAULT_VALUES = {
   sum: 0,
   type: '',
 }
+
+export const LOCALE = 'uk-UA'

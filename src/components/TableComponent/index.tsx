@@ -11,18 +11,22 @@ import type { JSX } from 'react'
 import { TransactionType } from '@/types/enums.ts'
 import { Button } from '@/components/ui/button.tsx'
 import { Trash2 } from 'lucide-react'
+import { useTableComponent } from '@/components/TableComponent/useTableComponent.ts'
+import { formatNumbers } from '@/utils/formatNumbers/formatNumbers.ts'
 
 function TableComponent({
   transactions,
   removeTransaction,
 }: TableComponentProps): JSX.Element {
+  const { colorForSum } = useTableComponent()
+
   return (
     <Table>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[150px]">Опис</TableHead>
           <TableHead>Тип</TableHead>
-          <TableHead className="text-left">Сума</TableHead>
+          <TableHead className="text-right">Сума</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -43,8 +47,10 @@ function TableComponent({
                   ? 'Дохід'
                   : 'Витрата'}
               </TableCell>
-              <TableCell className="text-right">
-                {transaction.sum} грн
+              <TableCell
+                className={`text-right ${colorForSum(transaction.type)}`}
+              >
+                {formatNumbers(Number(transaction.sum))} ₴
               </TableCell>
               <TableCell>
                 <Button
