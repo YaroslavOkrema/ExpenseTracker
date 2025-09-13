@@ -1,8 +1,10 @@
 import { Theme } from '@/types/enums.ts'
 import { useTheme } from '@/hooks/useTheme.ts'
+import { useLocales } from '@/context/LocalesContext'
 
 export function useSelectTheme() {
   const { setTheme } = useTheme()
+  const { translations } = useLocales()
 
   function handleDark() {
     setTheme(Theme.DARK)
@@ -16,5 +18,10 @@ export function useSelectTheme() {
     setTheme(Theme.SYSTEM)
   }
 
-  return { handleDark, handleLight, handleSystem }
+  return {
+    handleDark,
+    handleLight,
+    handleSystem,
+    locale: translations.settings,
+  }
 }

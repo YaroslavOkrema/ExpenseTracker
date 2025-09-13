@@ -9,10 +9,10 @@ import {
 import { useLanguageSelect } from '@/components/LanguageSelect/useLanguageSelect.ts'
 
 function LanguageSelect() {
-  const { locale, handleChangeLocale } = useLanguageSelect()
+  const { locale, handleChangeLocale, locales } = useLanguageSelect()
   return (
     <div className="flex justify-between mt-6">
-      <span className="text-md font-medium w-[72%]">Мова</span>
+      <span className="text-md font-medium w-[72%]">{locales.language}</span>
       <Select
         value={locale}
         onValueChange={(value: Language) => handleChangeLocale(value)}
@@ -21,8 +21,8 @@ function LanguageSelect() {
           <SelectValue placeholder="En" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value={Language.EN}>English</SelectItem>
-          <SelectItem value={Language.UA}>Українська</SelectItem>
+          <SelectItem value={Language.EN}>EN</SelectItem>
+          <SelectItem value={Language.UA}>UA</SelectItem>
         </SelectContent>
       </Select>
     </div>

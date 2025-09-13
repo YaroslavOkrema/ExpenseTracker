@@ -18,41 +18,46 @@ function FormComponent({
   setShowForm,
   setTransaction,
 }: FormProps): JSX.Element {
-  const { handleSubmit, hamdleSubmit, control, register } = useFormComponent({
-    setShowForm,
-    setTransaction,
-  })
+  const { handleSubmit, hamdleSubmit, control, register, locale } =
+    useFormComponent({
+      setShowForm,
+      setTransaction,
+    })
 
   return (
     <form onSubmit={handleSubmit(hamdleSubmit)} className="flex flex-col gap-2">
-      <Label>Опис</Label>
+      <Label>{locale.description}</Label>
       <Input
         title="text"
         {...register('description')}
-        placeholder="Наприклад: Продукти"
+        placeholder={locale.descriptionPlaceholder}
       />
 
-      <Label>Сума</Label>
+      <Label>{locale.sum}</Label>
       <Input title="number" {...register('sum')} placeholder="1000" />
 
-      <Label>Тип</Label>
+      <Label>{locale.type}</Label>
       <Controller
         name="type"
         control={control}
         render={({ field }) => (
           <Select onValueChange={field.onChange} value={field.value}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Дохід" />
+              <SelectValue placeholder={locale.expense} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={TransactionType.INCOME}>Дохід</SelectItem>
-              <SelectItem value={TransactionType.EXPENSE}>Витрата</SelectItem>
+              <SelectItem value={TransactionType.INCOME}>
+                {locale.income}
+              </SelectItem>
+              <SelectItem value={TransactionType.EXPENSE}>
+                {locale.expense}
+              </SelectItem>
             </SelectContent>
           </Select>
         )}
       />
 
-      <Button className="mt-2">Зберегти</Button>
+      <Button className="mt-2">{locale.buttonSave}</Button>
     </form>
   )
 }

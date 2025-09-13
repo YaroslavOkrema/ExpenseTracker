@@ -1,3 +1,38 @@
 {
-  "trackerTitle": "Expense Tracker"
+  "tracker": {
+    "trackerTab": "Expense Tracker",
+    "analyticsTab": "Analytics",
+    "settingsTab": "Settings",
+    "title": "My Budget",
+    "buttonAdd": "Add Transaction",
+    "buttonClose": "Close",
+    "buttonSave": "Save",
+    "listTitle": "Transaction list",
+    "description": "Description",
+    "descriptionPlaceholder": "For example: Groceries",
+    "sum": "Amount",
+    "type": "Type",
+    "income": "Income",
+    "expense": "Expense",
+    "noTransactions": "No transactions",
+    "next": "Next",
+    "prev": "Previous"
+  },
+  "analytics": {
+    "title": "Analytics",
+    "income": "Income",
+    "expenses": "Expenses",
+    "expenseRatio": "Expenses to Income (%)",
+    "savingRates": "Savings (%)",
+    "maxIncome": "Maximum Income",
+    "maxExpense": "Maximum Expense",
+    "currency": "UAH"
+  },
+  "settings": {
+    "mode": "Mode",
+    "dark": "Dark",
+    "light": "Light",
+    "system": "System",
+    "language": "Language"
+  }
 }

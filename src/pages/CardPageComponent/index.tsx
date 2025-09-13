@@ -42,6 +42,7 @@ function CardPageComponent() {
     savingRates,
     maxIncome,
     maxExpense,
+    locale,
   } = useCardPageComponent()
 
   return (
@@ -49,21 +50,21 @@ function CardPageComponent() {
       <div className="flex w-full max-w-sm flex-col gap-6">
         <Tabs defaultValue="expense">
           <TabsList>
-            <TabsTrigger value="expense">Expense Tracker</TabsTrigger>
-            <TabsTrigger value="analytics">Аналітика</TabsTrigger>
-            <TabsTrigger value="settings">Налаштування</TabsTrigger>
+            <TabsTrigger value="expense">{locale.trackerTab}</TabsTrigger>
+            <TabsTrigger value="analytics">{locale.analyticsTab}</TabsTrigger>
+            <TabsTrigger value="settings">{locale.settingsTab}</TabsTrigger>
           </TabsList>
           <TabsContent value="expense">
             <Card className="w-full max-w-sm">
               <CardHeader>
                 <CardTitle className="text-center text-xl mb-4">
-                  Мій бюджет
+                  {locale.title}
                 </CardTitle>
                 <div className="text-4xl text-center mb-4">
                   {formatNumbers(balance)} ₴
                 </div>
                 <Button className="cursor-pointer" onClick={toggleShowForm}>
-                  {showForm ? 'Закрити' : 'Додати транзакцію'}
+                  {showForm ? locale.buttonClose : locale.buttonAdd}
                 </Button>
               </CardHeader>
               <CardContent>
@@ -74,7 +75,7 @@ function CardPageComponent() {
                   />
                 ) : (
                   <div>
-                    <Label className="mb-4">Список транзакцій</Label>
+                    <Label className="mb-4">{locale.listTitle}</Label>
                     <TableComponent
                       transactions={paginatedTransactions}
                       removeTransaction={removeTransactions}
@@ -94,7 +95,7 @@ function CardPageComponent() {
           <TabsContent value="analytics">
             <Card className="w-full max-w-sm">
               <CardHeader>
-                <CardTitle>Аналітика</CardTitle>
+                <CardTitle>{locale.analyticsTab}</CardTitle>
               </CardHeader>
               <CardContent>
                 <AnalyticsComponent
@@ -111,7 +112,7 @@ function CardPageComponent() {
           <TabsContent value="settings">
             <Card className="w-full max-w-sm">
               <CardHeader>
-                <CardTitle>Налаштування</CardTitle>
+                <CardTitle>{locale.settingsTab}</CardTitle>
               </CardHeader>
               <CardContent>
                 <ThemeSelect />

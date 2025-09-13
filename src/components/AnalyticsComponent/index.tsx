@@ -1,3 +1,5 @@
+import { useLocales } from '@/context/LocalesContext'
+
 type AnalyticsComponentProps = {
   income: number
   expenses: number
@@ -15,31 +17,41 @@ function AnalyticsComponent({
   maxIncome,
   maxExpense,
 }: AnalyticsComponentProps) {
+  const { translations } = useLocales()
+
   return (
     <div>
       <div className="flex justify-between mb-2">
-        <span>Доходи:</span>
-        <span>{income} грн</span>
+        <span>{translations.analytics.income}:</span>
+        <span>
+          {income} {translations.analytics.currency}
+        </span>
       </div>
       <div className="flex justify-between mb-2">
-        <span>Витрати:</span>
-        <span>{expenses} грн</span>
+        <span>{translations.analytics.expenses}:</span>
+        <span>
+          {expenses} {translations.analytics.currency}
+        </span>
       </div>
       <div className="flex justify-between mb-2">
-        <span>Витрати від доходу (%):</span>
+        <span>{translations.analytics.expenseRatio}:</span>
         <span>{expenseRatio} %</span>
       </div>
       <div className="flex justify-between mb-2">
-        <span>Заощадження (%):</span>
+        <span>{translations.analytics.savingRates}:</span>
         <span>{savingRates} %</span>
       </div>
       <div className="flex justify-between mb-2">
-        <span>Найбільший дохід:</span>
-        <span>{maxIncome} грн</span>
+        <span>{translations.analytics.maxIncome}:</span>
+        <span>
+          {maxIncome} {translations.analytics.currency}
+        </span>
       </div>
       <div className="flex justify-between">
-        <span>Найбільша витрата:</span>
-        <span>{maxExpense} грн</span>
+        <span>{translations.analytics.maxExpense}:</span>
+        <span>
+          {maxExpense} {translations.analytics.currency}
+        </span>
       </div>
     </div>
   )

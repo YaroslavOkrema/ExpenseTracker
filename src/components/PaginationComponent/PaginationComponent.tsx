@@ -3,10 +3,11 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from '@/components/ui/pagination.tsx'
 import { PaginationProps } from '@/components/PaginationComponent/types.ts'
+import { JSX } from 'react'
+import { useLocales } from '@/context/LocalesContext'
+import { Button } from '@/components/ui/button.tsx'
 
 function PaginationComponent({
   handlePrevClick,
@@ -14,15 +15,21 @@ function PaginationComponent({
   handleNumberClick,
   page,
   pageNumbers,
-}: PaginationProps) {
+}: PaginationProps): JSX.Element {
+  const { translations } = useLocales()
+
   return (
     <Pagination className="mt-4">
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious
+          <Button
+            type="button"
+            variant="ghost"
             className="cursor-pointer"
             onClick={handlePrevClick}
-          />
+          >
+            {translations.tracker.prev}
+          </Button>
         </PaginationItem>
         {pageNumbers.map(num => (
           <PaginationItem key={num}>
@@ -35,10 +42,13 @@ function PaginationComponent({
           </PaginationItem>
         ))}
         <PaginationItem>
-          <PaginationNext
+          <Button
             className="cursor-pointer"
+            variant="ghost"
             onClick={handleNextClick}
-          />
+          >
+            {translations.tracker.next}
+          </Button>
         </PaginationItem>
       </PaginationContent>
     </Pagination>

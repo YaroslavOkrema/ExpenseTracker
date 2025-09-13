@@ -17,11 +17,14 @@ import {
   DEFAULT_PAGE,
   ITEMS_PER_PAGE,
 } from '@/pages/CardPageComponent/constants.ts'
+import { useLocales } from '@/context/LocalesContext'
 
 export const useCardPageComponent = () => {
   const [showForm, setShowForm] = useState<boolean>(false)
   const [transactions, setTransaction] = useState<Data[]>(getTransactions())
   const [page, setPage] = useState<number>(DEFAULT_PAGE)
+
+  const { translations } = useLocales()
 
   const totalPages = Math.ceil(transactions.length / ITEMS_PER_PAGE)
 
@@ -85,14 +88,14 @@ export const useCardPageComponent = () => {
   }
 
   const handlePrevClick = (
-    event: React.MouseEvent<HTMLAnchorElement>,
+    event: React.MouseEvent<HTMLButtonElement>,
   ): void => {
     event.preventDefault()
     handlePageChange(page - DEFAULT_PAGE)
   }
 
   const handleNextClick = (
-    event: React.MouseEvent<HTMLAnchorElement>,
+    event: React.MouseEvent<HTMLButtonElement>,
   ): void => {
     event.preventDefault()
     handlePageChange(page + DEFAULT_PAGE)
@@ -139,5 +142,6 @@ export const useCardPageComponent = () => {
     savingRates,
     maxIncome,
     maxExpense,
+    locale: translations.tracker,
   }
 }

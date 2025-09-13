@@ -18,22 +18,22 @@ function TableComponent({
   transactions,
   removeTransaction,
 }: TableComponentProps): JSX.Element {
-  const { colorForSum } = useTableComponent()
+  const { colorForSum, locale } = useTableComponent()
 
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[150px]">Опис</TableHead>
-          <TableHead>Тип</TableHead>
-          <TableHead className="text-right">Сума</TableHead>
+          <TableHead className="w-[150px]">{locale.description}</TableHead>
+          <TableHead>{locale.type}</TableHead>
+          <TableHead className="text-right">{locale.sum}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {transactions.length === 0 ? (
           <TableRow>
             <TableCell colSpan={3} className="text-center text-gray-500">
-              Немає транзакцій
+              {locale.noTransactions}
             </TableCell>
           </TableRow>
         ) : (
@@ -44,8 +44,8 @@ function TableComponent({
               </TableCell>
               <TableCell>
                 {transaction.type === TransactionType.INCOME
-                  ? 'Дохід'
-                  : 'Витрата'}
+                  ? locale.income
+                  : locale.expense}
               </TableCell>
               <TableCell
                 className={`text-right ${colorForSum(transaction.type)}`}
