@@ -8,3 +8,8 @@ export enum Theme {
   LIGHT = 'light',
   SYSTEM = 'system',
 }
+
+export enum Language {
+  EN = 'en',
+  UA = 'uk',
+}

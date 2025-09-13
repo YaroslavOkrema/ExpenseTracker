@@ -20,6 +20,7 @@ import PaginationComponent from '@/components/PaginationComponent/PaginationComp
 import ThemeSelect from '@/components/ThemeSelect'
 import AnalyticsComponent from '@/components/AnalyticsComponent'
 import { formatNumbers } from '@/utils/formatNumbers/formatNumbers.ts'
+import LanguageSelect from '@/components/LanguageSelect'
 
 function CardPageComponent() {
   const {
@@ -114,6 +115,7 @@ function CardPageComponent() {
               </CardHeader>
               <CardContent>
                 <ThemeSelect />
+                <LanguageSelect />
               </CardContent>
             </Card>
           </TabsContent>
