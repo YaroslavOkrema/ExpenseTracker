@@ -38,7 +38,7 @@ function TableComponent({
           </TableRow>
         ) : (
           transactions.map(transaction => (
-            <TableRow key={transaction.description}>
+            <TableRow key={transaction.id}>
               <TableCell className="font-medium">
                 {transaction.description}
               </TableCell>
