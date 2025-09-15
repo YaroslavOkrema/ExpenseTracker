@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { Language } from '@/types/enums.ts'
+import { useCallback, useMemo, useState } from 'react'
+import { Language, LocalStorageKeys } from '@/types/enums.ts'
 import { Locale } from '@/types/types.ts'
 import { TRANSLATIONS } from '@/constants/constants.ts'
 import { LocalesContextData } from '@/context/LocalesContext/types.ts'
@@ -7,15 +7,19 @@ import { LocalesContext } from '@/context/LocalesContext'
 
 const LocalesProvider = ({ ...props }) => {
   const [locale, setLocale] = useState<Language>(
-    (localStorage.getItem('locale') as Language) || Language.EN,
+    (localStorage.getItem(LocalStorageKeys.LOCALE) as Language) || Language.EN,
   )
   const [translations, setTranslations] = useState<Locale>(TRANSLATIONS[locale])
 
-  const handleChangeLocale = (locale: Language): void => {
-    setLocale(locale)
-    setTranslations(TRANSLATIONS[locale])
-    localStorage.setItem('locale', locale)
-  }
+  const handleChangeLocale = useCallback(
+    (newLocale: Language): void => {
+      if (newLocale === locale) return
+      setLocale(newLocale)
+      setTranslations(TRANSLATIONS[newLocale])
+      localStorage.setItem(LocalStorageKeys.LOCALE, newLocale)
+    },
+    [locale],
+  )
 
   const localesContextData: LocalesContextData = useMemo(
     () => ({
@@ -23,7 +27,7 @@ const LocalesProvider = ({ ...props }) => {
       translations,
       handleChangeLocale,
     }),
-    [locale, translations],
+    [locale, translations, handleChangeLocale],
   )
 
   return <LocalesContext.Provider value={localesContextData} {...props} />
