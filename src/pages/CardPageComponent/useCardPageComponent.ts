@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import type { Data } from '@/types/types.ts'
 import {
   calculateExpense,
@@ -74,11 +74,15 @@ export const useCardPageComponent = () => {
   }, [transactions])
 
   const removeTransactions = (id: string | number): void => {
-    const removeTransaction = transactions.filter(
-      transaction => transaction.id !== id,
+    const next = transactions.filter(transaction => transaction.id !== id)
+    setTransaction(next)
+    saveTransactions(next)
+
+    const nextTotal = Math.max(
+      DEFAULT_PAGE,
+      Math.ceil(next.length / ITEMS_PER_PAGE),
     )
-    setTransaction(removeTransaction)
-    saveTransactions(removeTransaction)
+    if (page > nextTotal) setPage(nextTotal)
   }
 
   const handlePageChange = (newPage: number): void => {
@@ -113,12 +117,6 @@ export const useCardPageComponent = () => {
     () => Array.from({ length: totalPages }, (_, i) => i + 1),
     [totalPages],
   )
-
-  useEffect(() => {
-    if (page > totalPages) {
-      setPage(DEFAULT_PAGE)
-    }
-  }, [page, totalPages])
 
   return {
     showForm,

@@ -1,58 +1,17 @@
-import { useLocales } from '@/context/LocalesContext'
+import { AnalyticsComponentProps } from '@/components/AnalyticsComponent/types.ts'
+import { useAnalyticsComponent } from '@/components/AnalyticsComponent/useAnalyticsComponent.ts'
 
-type AnalyticsComponentProps = {
-  income: number
-  expenses: number
-  expenseRatio: number
-  savingRates: number
-  maxIncome: number
-  maxExpense: number
-}
-
-function AnalyticsComponent({
-  income,
-  expenses,
-  expenseRatio,
-  savingRates,
-  maxIncome,
-  maxExpense,
-}: AnalyticsComponentProps) {
-  const { translations } = useLocales()
+function AnalyticsComponent(data: AnalyticsComponentProps) {
+  const { fields } = useAnalyticsComponent(data)
 
   return (
     <div>
-      <div className="flex justify-between mb-2">
-        <span>{translations.analytics.income}:</span>
-        <span>
-          {income} {translations.analytics.currency}
-        </span>
-      </div>
-      <div className="flex justify-between mb-2">
-        <span>{translations.analytics.expenses}:</span>
-        <span>
-          {expenses} {translations.analytics.currency}
-        </span>
-      </div>
-      <div className="flex justify-between mb-2">
-        <span>{translations.analytics.expenseRatio}:</span>
-        <span>{expenseRatio} %</span>
-      </div>
-      <div className="flex justify-between mb-2">
-        <span>{translations.analytics.savingRates}:</span>
-        <span>{savingRates} %</span>
-      </div>
-      <div className="flex justify-between mb-2">
-        <span>{translations.analytics.maxIncome}:</span>
-        <span>
-          {maxIncome} {translations.analytics.currency}
-        </span>
-      </div>
-      <div className="flex justify-between">
-        <span>{translations.analytics.maxExpense}:</span>
-        <span>
-          {maxExpense} {translations.analytics.currency}
-        </span>
-      </div>
+      {fields.map(({ label, value }) => (
+        <div key={label} className="flex justify-between mt-2 last:mb-0">
+          <span>{label}:</span>
+          <span>{value}</span>
+        </div>
+      ))}
     </div>
   )
 }

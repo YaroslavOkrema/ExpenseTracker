@@ -13,3 +13,8 @@ export enum Language {
   EN = 'en',
   UA = 'uk',
 }
+
+export enum LocalStorageKeys {
+  LOCALE = 'locale',
+  THEME = 'theme',
+}
