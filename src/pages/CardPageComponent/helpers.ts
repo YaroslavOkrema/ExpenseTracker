@@ -12,3 +12,29 @@ export function calculateExpense(transactions: Data[]): number {
     .filter(transaction => transaction.type === TransactionType.EXPENSE)
     .reduce((sum, transaction) => sum + Number(transaction.sum), 0)
 }
+
+export function calculateExpenseRatio(income: number, expenses: number) {
+  return income > 0 ? Math.ceil((expenses / income) * 100) : 0
+}
+
+export function calculateSavingRates(income: number, balance: number) {
+  return income > 0 ? Math.ceil((balance / income) * 100) : 0
+}
+
+export function calculateMaxIncome(transactions: Data[]) {
+  return Math.max(
+    ...transactions
+      .filter(transaction => transaction.type === TransactionType.INCOME)
+      .map(transaction => transaction.sum),
+    0,
+  )
+}
+
+export function calculateMaxExpense(transactions: Data[]) {
+  return Math.max(
+    ...transactions
+      .filter(transaction => transaction.type === TransactionType.EXPENSE)
+      .map(transaction => transaction.sum),
+    0,
+  )
+}

@@ -16,9 +16,14 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs.tsx'
 
+import PaginationComponent from '@/components/PaginationComponent/PaginationComponent.tsx'
+import ThemeSelect from '@/components/ThemeSelect'
+import AnalyticsComponent from '@/components/AnalyticsComponent'
+import { formatNumbers } from '@/utils/formatNumbers/formatNumbers.ts'
+import LanguageSelect from '@/components/LanguageSelect'
+
 function CardPageComponent() {
   const {
-    transactions,
     toggleShowForm,
     showForm,
     setTransaction,
@@ -26,6 +31,18 @@ function CardPageComponent() {
     income,
     expenses,
     balance,
+    removeTransactions,
+    paginatedTransactions,
+    page,
+    pageNumbers,
+    handleNextClick,
+    handlePrevClick,
+    handleNumberClick,
+    expenseRatio,
+    savingRates,
+    maxIncome,
+    maxExpense,
+    locale,
   } = useCardPageComponent()
 
   return (
@@ -33,24 +50,21 @@ function CardPageComponent() {
       <div className="flex w-full max-w-sm flex-col gap-6">
         <Tabs defaultValue="expense">
           <TabsList>
-            <TabsTrigger value="expense">Expense Tracker</TabsTrigger>
-            <TabsTrigger value="analytics">Аналітика</TabsTrigger>
+            <TabsTrigger value="expense">{locale.trackerTab}</TabsTrigger>
+            <TabsTrigger value="analytics">{locale.analyticsTab}</TabsTrigger>
+            <TabsTrigger value="settings">{locale.settingsTab}</TabsTrigger>
           </TabsList>
           <TabsContent value="expense">
             <Card className="w-full max-w-sm">
               <CardHeader>
-                <CardTitle className="text-center">Мій бюджет</CardTitle>
-                <Label>Баланс: {balance} грн</Label>
-                <div className="flex gap-4 mb-4">
-                  <Label>Доходи: {income} грн</Label>
-                  <Label>Витрати: {expenses} грн</Label>
+                <CardTitle className="text-center text-xl mb-4">
+                  {locale.title}
+                </CardTitle>
+                <div className="text-4xl text-center mb-4">
+                  {formatNumbers(balance)} ₴
                 </div>
-                <Button
-                  className="cursor-pointer"
-                  variant="link"
-                  onClick={toggleShowForm}
-                >
-                  {showForm ? 'Закрити' : 'Додати транзакцію'}
+                <Button className="cursor-pointer" onClick={toggleShowForm}>
+                  {showForm ? locale.buttonClose : locale.buttonAdd}
                 </Button>
               </CardHeader>
               <CardContent>
@@ -61,8 +75,18 @@ function CardPageComponent() {
                   />
                 ) : (
                   <div>
-                    <Label className="mb-4">Список транзакцій</Label>
-                    <TableComponent transactions={transactions} />
+                    <Label className="mb-4">{locale.listTitle}</Label>
+                    <TableComponent
+                      transactions={paginatedTransactions}
+                      removeTransaction={removeTransactions}
+                    />
+                    <PaginationComponent
+                      page={page}
+                      pageNumbers={pageNumbers}
+                      handlePrevClick={handlePrevClick}
+                      handleNextClick={handleNextClick}
+                      handleNumberClick={handleNumberClick}
+                    />
                   </div>
                 )}
               </CardContent>
@@ -71,10 +95,28 @@ function CardPageComponent() {
           <TabsContent value="analytics">
             <Card className="w-full max-w-sm">
               <CardHeader>
-                <CardTitle>Login to your account</CardTitle>
+                <CardTitle>{locale.analyticsTab}</CardTitle>
               </CardHeader>
               <CardContent>
-                <div>Soon...</div>
+                <AnalyticsComponent
+                  income={income}
+                  expenses={expenses}
+                  expenseRatio={expenseRatio}
+                  savingRates={savingRates}
+                  maxIncome={maxIncome}
+                  maxExpense={maxExpense}
+                />
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="settings">
+            <Card className="w-full max-w-sm">
+              <CardHeader>
+                <CardTitle>{locale.settingsTab}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ThemeSelect />
+                <LanguageSelect />
               </CardContent>
             </Card>
           </TabsContent>

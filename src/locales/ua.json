@@ -1,0 +1,37 @@
+{
+  "tracker": {
+    "trackerTab": "Трекер Витрат",
+    "analyticsTab": "Аналітика",
+    "settingsTab": "Налаштування",
+    "title": "Мій бюджет",
+    "buttonAdd": "Додати транзакцію",
+    "buttonClose": "Закрити",
+    "buttonSave": "Зберегти",
+    "listTitle": "Список транзакцій",
+    "description": "Опис",
+    "descriptionPlaceholder": "Наприклад: Продукти",
+    "sum": "Сума",
+    "type": "Тип",
+    "income": "Дохід",
+    "expense": "Витрата",
+    "noTransactions": "Немає транзакцій",
+    "next": "Наступна",
+    "prev": "Попередня"
+  },
+  "analytics": {
+    "income": "Доходи",
+    "expenses": "Витрати",
+    "expenseRatio": "Витрати від доходу (%)",
+    "savingRates": "Заощадження (%)",
+    "maxIncome": "Найбільший дохід",
+    "maxExpense": "Найбільша витрата",
+    "currency": "грн"
+  },
+  "settings": {
+    "mode": "Режим",
+    "dark": "Темна",
+    "light": "Світла",
+    "system": "Системна",
+    "language": "Мова"
+  }
+}
