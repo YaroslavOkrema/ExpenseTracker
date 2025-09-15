@@ -22,7 +22,7 @@ export const useFormComponent = ({
     }
 
     setTransaction(prev => {
-      const transaction = [...prev, newTransaction]
+      const transaction = [newTransaction, ...prev]
 
       saveTransactions(transaction)
 
