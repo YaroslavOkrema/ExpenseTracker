@@ -18,6 +18,7 @@ import {
   ITEMS_PER_PAGE,
 } from '@/pages/CardPageComponent/constants.ts'
 import { useLocales } from '@/context/LocalesContext'
+import { toast } from 'sonner'
 
 export const useCardPageComponent = () => {
   const [showForm, setShowForm] = useState<boolean>(false)
@@ -83,6 +84,8 @@ export const useCardPageComponent = () => {
       Math.ceil(next.length / ITEMS_PER_PAGE),
     )
     if (page > nextTotal) setPage(nextTotal)
+
+    toast.success(translations.toasts.remove)
   }
 
   const handlePageChange = (newPage: number): void => {

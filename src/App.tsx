@@ -3,6 +3,7 @@ import CardPageComponent from '@/pages/CardPageComponent'
 import { ThemeProvider } from '@/providers/theme'
 import LocalesProvider from '@/providers/locales'
 import { LocalStorageKeys, Theme } from '@/types/enums.ts'
+import { Toaster } from 'sonner'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         storageKey={LocalStorageKeys.THEME}
       >
         <CardPageComponent />
+        <Toaster />
       </ThemeProvider>
     </LocalesProvider>
   )
