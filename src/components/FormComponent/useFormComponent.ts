@@ -4,6 +4,7 @@ import type { FormProps } from '@/components/FormComponent/types.ts'
 import { DEFAULT_VALUES } from '@/constants/constants.ts'
 import { saveTransactions } from '@/utils/localeStorage/localeStorage.ts'
 import { useLocales } from '@/context/LocalesContext'
+import { toast } from 'sonner'
 
 export const useFormComponent = ({
   setShowForm,
@@ -30,6 +31,8 @@ export const useFormComponent = ({
     })
     reset()
     setShowForm(false)
+
+    toast.success(translations.toasts.success)
   }
 
   return {

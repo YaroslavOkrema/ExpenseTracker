@@ -33,5 +33,9 @@
     "light": "Light",
     "system": "System",
     "language": "Language"
+  },
+  "toasts": {
+    "success": "Transaction successfully added",
+    "remove": "Transaction successfully deleted"
   }
 }
