@@ -21,6 +21,7 @@ import ThemeSelect from '@/components/ThemeSelect'
 import AnalyticsComponent from '@/components/AnalyticsComponent'
 import { formatNumbers } from '@/utils/formatNumbers/formatNumbers.ts'
 import LanguageSelect from '@/components/LanguageSelect'
+import DiagramsComponent from '@/components/diagrams-component'
 
 function CardPageComponent() {
   const {
@@ -55,6 +56,7 @@ function CardPageComponent() {
             <TabsTrigger value="expense">{locale.trackerTab}</TabsTrigger>
             <TabsTrigger value="analytics">{locale.analyticsTab}</TabsTrigger>
             <TabsTrigger value="settings">{locale.settingsTab}</TabsTrigger>
+            <TabsTrigger value="diagrams">Діаграми</TabsTrigger>
           </TabsList>
           <TabsContent value="expense">
             <Card className="w-md">
@@ -121,6 +123,16 @@ function CardPageComponent() {
               <CardContent>
                 <ThemeSelect />
                 <LanguageSelect />
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="diagrams">
+            <Card className="w-full max-w-sm">
+              <CardHeader>
+                <CardTitle>Діаграми</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <DiagramsComponent income={income} expenses={expenses} />
               </CardContent>
             </Card>
           </TabsContent>
