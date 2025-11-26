@@ -57,7 +57,7 @@ function CardPageComponent() {
             <TabsTrigger value="settings">{locale.settingsTab}</TabsTrigger>
           </TabsList>
           <TabsContent value="expense">
-            <Card className="w-full max-w-sm">
+            <Card className="w-md">
               <CardHeader>
                 <CardTitle className="text-center text-xl mb-4">
                   {locale.title}

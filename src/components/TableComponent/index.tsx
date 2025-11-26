@@ -25,9 +25,9 @@ function TableComponent({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[150px]">{locale.description}</TableHead>
+          <TableHead>{locale.description}</TableHead>
           <TableHead>{locale.type}</TableHead>
-          <TableHead>Дата</TableHead>
+          <TableHead>{locale.date}</TableHead>
           <TableHead className="text-right">{locale.sum}</TableHead>
         </TableRow>
       </TableHeader>

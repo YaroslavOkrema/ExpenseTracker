@@ -12,6 +12,7 @@
     "descriptionPlaceholder": "For example: Groceries",
     "sum": "Amount",
     "type": "Type",
+    "date": "Date",
     "income": "Income",
     "expense": "Expense",
     "noTransactions": "No transactions",

@@ -12,6 +12,7 @@
     "descriptionPlaceholder": "Наприклад: Продукти",
     "sum": "Сума",
     "type": "Тип",
+    "date": "Дата",
     "income": "Дохід",
     "expense": "Витрата",
     "noTransactions": "Немає транзакцій",
