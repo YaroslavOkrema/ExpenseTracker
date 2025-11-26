@@ -25,6 +25,8 @@
     "savingRates": "Заощадження (%)",
     "maxIncome": "Найбільший дохід",
     "maxExpense": "Найбільша витрата",
+    "monthlyIncome": "Дохід за місяць",
+    "monthlyExpense": "Витрати за місяць",
     "currency": "грн"
   },
   "settings": {

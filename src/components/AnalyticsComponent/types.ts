@@ -5,4 +5,6 @@ export type AnalyticsComponentProps = {
   savingRates: number
   maxIncome: number
   maxExpense: number
+  monthlyIncome: number
+  monthlyExpense: number
 }

@@ -6,6 +6,7 @@ import {
   calculateIncome,
   calculateMaxExpense,
   calculateMaxIncome,
+  calculateMonthlyTransactions,
   calculateSavingRates,
 } from '@/pages/CardPageComponent/helpers.ts'
 import {
@@ -48,6 +49,8 @@ export const useCardPageComponent = () => {
     savingRates,
     maxIncome,
     maxExpense,
+    monthlyIncome,
+    monthlyExpenses,
   } = useMemo(() => {
     const income = calculateIncome(transactions)
 
@@ -63,6 +66,12 @@ export const useCardPageComponent = () => {
 
     const maxExpense = calculateMaxExpense(transactions)
 
+    const monthly = calculateMonthlyTransactions(transactions)
+
+    const monthlyIncome = calculateIncome(monthly)
+
+    const monthlyExpenses = calculateExpense(monthly)
+
     return {
       income,
       expenses,
@@ -71,6 +80,8 @@ export const useCardPageComponent = () => {
       savingRates,
       maxIncome,
       maxExpense,
+      monthlyIncome,
+      monthlyExpenses,
     }
   }, [transactions])
 
@@ -143,6 +154,8 @@ export const useCardPageComponent = () => {
     savingRates,
     maxIncome,
     maxExpense,
+    monthlyIncome,
+    monthlyExpenses,
     locale: translations.tracker,
   }
 }

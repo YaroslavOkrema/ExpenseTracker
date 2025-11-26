@@ -5,8 +5,16 @@ export function analyticsData(
   data: AnalyticsComponentProps,
   locale: Locale['analytics'],
 ) {
-  const { income, expenses, expenseRatio, savingRates, maxIncome, maxExpense } =
-    data
+  const {
+    income,
+    expenses,
+    expenseRatio,
+    savingRates,
+    maxIncome,
+    maxExpense,
+    monthlyIncome,
+    monthlyExpense,
+  } = data
   return [
     {
       label: locale.income,
@@ -31,6 +39,14 @@ export function analyticsData(
     {
       label: locale.maxExpense,
       value: `${maxExpense} ${locale.currency}`,
+    },
+    {
+      label: locale.monthlyIncome,
+      value: `${monthlyIncome} ${locale.currency}`,
+    },
+    {
+      label: locale.monthlyExpense,
+      value: `${monthlyExpense} ${locale.currency}`,
     },
   ]
 }

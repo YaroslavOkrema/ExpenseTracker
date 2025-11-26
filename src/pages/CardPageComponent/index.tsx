@@ -43,6 +43,8 @@ function CardPageComponent() {
     maxIncome,
     maxExpense,
     locale,
+    monthlyIncome,
+    monthlyExpenses,
   } = useCardPageComponent()
 
   return (
@@ -105,6 +107,8 @@ function CardPageComponent() {
                   savingRates={savingRates}
                   maxIncome={maxIncome}
                   maxExpense={maxExpense}
+                  monthlyIncome={monthlyIncome}
+                  monthlyExpense={monthlyExpenses}
                 />
               </CardContent>
             </Card>

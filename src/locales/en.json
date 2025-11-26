@@ -25,6 +25,8 @@
     "savingRates": "Savings (%)",
     "maxIncome": "Maximum Income",
     "maxExpense": "Maximum Expense",
+    "monthlyIncome": "Monthly income",
+    "monthlyExpense": "Monthly expenses",
     "currency": "UAH"
   },
   "settings": {

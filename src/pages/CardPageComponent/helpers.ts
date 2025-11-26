@@ -38,3 +38,14 @@ export function calculateMaxExpense(transactions: Data[]) {
     0,
   )
 }
+
+export function calculateMonthlyTransactions(
+  transactions: Data[],
+  year = new Date().getFullYear(),
+  month = new Date().getMonth(),
+) {
+  return transactions.filter(t => {
+    const date = new Date(t.date)
+    return date.getFullYear() === year && date.getMonth() === month
+  })
+}
