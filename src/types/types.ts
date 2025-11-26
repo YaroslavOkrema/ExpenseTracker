@@ -6,6 +6,7 @@ export type Data = {
   description: string
   sum: number
   type: string
+  date: string
 }
 
 export type Locale = (typeof TRANSLATIONS)[Language.EN]

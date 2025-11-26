@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { Trash2 } from 'lucide-react'
 import { useTableComponent } from '@/components/TableComponent/useTableComponent.ts'
 import { formatNumbers } from '@/utils/formatNumbers/formatNumbers.ts'
+import { formatDate } from '@/utils/format-date'
 
 function TableComponent({
   transactions,
@@ -26,6 +27,7 @@ function TableComponent({
         <TableRow>
           <TableHead className="w-[150px]">{locale.description}</TableHead>
           <TableHead>{locale.type}</TableHead>
+          <TableHead>Дата</TableHead>
           <TableHead className="text-right">{locale.sum}</TableHead>
         </TableRow>
       </TableHeader>
@@ -47,6 +49,7 @@ function TableComponent({
                   ? locale.income
                   : locale.expense}
               </TableCell>
+              <TableCell>{formatDate(transaction.date)}</TableCell>
               <TableCell
                 className={`text-right ${colorForSum(transaction.type)}`}
               >

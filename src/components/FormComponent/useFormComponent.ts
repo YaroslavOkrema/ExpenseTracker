@@ -20,14 +20,19 @@ export const useFormComponent = ({
     const newTransaction: Data = {
       ...data,
       id: crypto.randomUUID(),
+      date: new Date().toISOString(),
     }
 
     setTransaction(prev => {
       const transaction = [newTransaction, ...prev]
 
+      const sorted = [...transaction].sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime()
+      })
+
       saveTransactions(transaction)
 
-      return transaction
+      return sorted
     })
     reset()
     setShowForm(false)
