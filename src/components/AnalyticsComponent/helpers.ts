@@ -14,6 +14,8 @@ export function analyticsData(
     maxExpense,
     monthlyIncome,
     monthlyExpense,
+    avgExpense7,
+    avgExpense30,
   } = data
   return [
     {
@@ -47,6 +49,14 @@ export function analyticsData(
     {
       label: locale.monthlyExpense,
       value: `${monthlyExpense} ${locale.currency}`,
+    },
+    {
+      label: 'Середні витрати за 7 днів',
+      value: `${avgExpense7} ${locale.currency}`,
+    },
+    {
+      label: 'Середні витрати за 30 днів',
+      value: `${avgExpense30} ${locale.currency}`,
     },
   ]
 }

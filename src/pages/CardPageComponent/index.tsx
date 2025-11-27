@@ -22,6 +22,7 @@ import AnalyticsComponent from '@/components/AnalyticsComponent'
 import { formatNumbers } from '@/utils/formatNumbers/formatNumbers.ts'
 import LanguageSelect from '@/components/LanguageSelect'
 import DiagramsComponent from '@/components/diagrams-component'
+import { ExpensesTrendChart } from '@/components/expenses-trend-chart'
 
 function CardPageComponent() {
   const {
@@ -46,6 +47,9 @@ function CardPageComponent() {
     locale,
     monthlyIncome,
     monthlyExpenses,
+    avgExpense7,
+    avgExpense30,
+    transactions,
   } = useCardPageComponent()
 
   return (
@@ -55,8 +59,8 @@ function CardPageComponent() {
           <TabsList>
             <TabsTrigger value="expense">{locale.trackerTab}</TabsTrigger>
             <TabsTrigger value="analytics">{locale.analyticsTab}</TabsTrigger>
-            <TabsTrigger value="settings">{locale.settingsTab}</TabsTrigger>
             <TabsTrigger value="diagrams">Діаграми</TabsTrigger>
+            <TabsTrigger value="settings">{locale.settingsTab}</TabsTrigger>
           </TabsList>
           <TabsContent value="expense">
             <Card className="w-md">
@@ -111,6 +115,8 @@ function CardPageComponent() {
                   maxExpense={maxExpense}
                   monthlyIncome={monthlyIncome}
                   monthlyExpense={monthlyExpenses}
+                  avgExpense7={avgExpense7}
+                  avgExpense30={avgExpense30}
                 />
               </CardContent>
             </Card>
@@ -132,7 +138,26 @@ function CardPageComponent() {
                 <CardTitle>Діаграми</CardTitle>
               </CardHeader>
               <CardContent>
-                <DiagramsComponent income={income} expenses={expenses} />
+                {/*<DiagramsComponent income={income} expenses={expenses} />*/}
+                {/*<ExpensesTrendChart transactions={transactions} />*/}
+                <div className="flex w-full max-w-sm flex-col gap-6">
+                  <Tabs defaultValue="expensesIncome">
+                    <TabsList>
+                      <TabsTrigger value="expensesIncome">
+                        Витрати/Доходи
+                      </TabsTrigger>
+                      <TabsTrigger value="movingAvarage">
+                        Ковзне середнє
+                      </TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="expensesIncome">
+                      <DiagramsComponent income={income} expenses={expenses} />
+                    </TabsContent>
+                    <TabsContent value="movingAvarage">
+                      <ExpensesTrendChart transactions={transactions} />
+                    </TabsContent>
+                  </Tabs>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>

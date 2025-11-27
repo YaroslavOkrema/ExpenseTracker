@@ -20,6 +20,8 @@ import {
 } from '@/pages/CardPageComponent/constants.ts'
 import { useLocales } from '@/context/LocalesContext'
 import { toast } from 'sonner'
+import { getDailyExpenses } from '@/utils/daily-expenses'
+import { movingAverage } from '@/utils/moving-average'
 
 export const useCardPageComponent = () => {
   const [showForm, setShowForm] = useState<boolean>(false)
@@ -51,6 +53,8 @@ export const useCardPageComponent = () => {
     maxExpense,
     monthlyIncome,
     monthlyExpenses,
+    avgExpense7,
+    avgExpense30,
   } = useMemo(() => {
     const income = calculateIncome(transactions)
 
@@ -72,6 +76,15 @@ export const useCardPageComponent = () => {
 
     const monthlyExpenses = calculateExpense(monthly)
 
+    const daily = getDailyExpenses(transactions)
+    const dailyValues = daily.map(d => d.expense)
+
+    const ma7 = movingAverage(dailyValues, 7)
+    const ma30 = movingAverage(dailyValues, 30)
+
+    const avgExpense7 = ma7.length ? ma7[ma7.length - 1] : 0
+    const avgExpense30 = ma30.length ? ma30[ma7.length - 1] : 0
+
     return {
       income,
       expenses,
@@ -82,6 +95,8 @@ export const useCardPageComponent = () => {
       maxExpense,
       monthlyIncome,
       monthlyExpenses,
+      avgExpense7,
+      avgExpense30,
     }
   }, [transactions])
 
@@ -156,6 +171,8 @@ export const useCardPageComponent = () => {
     maxExpense,
     monthlyIncome,
     monthlyExpenses,
+    avgExpense7,
+    avgExpense30,
     locale: translations.tracker,
   }
 }

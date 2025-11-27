@@ -12,7 +12,7 @@ type Props = {
   expenses: number
 }
 
-const COLORS = ['#4ade80', '#f87171'] // зелений = дохід, червоний = витрати
+const COLORS = ['#4ade80', '#f87171']
 
 export default function IncomeExpensePie({ income, expenses }: Props) {
   const data = [
