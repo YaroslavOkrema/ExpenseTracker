@@ -127,7 +127,7 @@ function CardPageComponent() {
                 <CardTitle>
                   <div className="flex items-center gap-2">
                     <AnalyticsIcon />
-                    {locale.analyticsTab}
+                    <p className="text-lg">{locale.analyticsTab}</p>
                   </div>
                 </CardTitle>
               </CardHeader>
@@ -153,7 +153,7 @@ function CardPageComponent() {
                 <CardTitle>
                   <div className="flex items-center gap-2">
                     <SettingsIcon />
-                    {locale.settingsTab}
+                    <p className="text-lg">{locale.settingsTab}</p>
                   </div>
                 </CardTitle>
               </CardHeader>
@@ -169,7 +169,7 @@ function CardPageComponent() {
                 <CardTitle>
                   <div className="flex items-center gap-2">
                     <DiagramsIcon />
-                    {locale.diagramsTab}
+                    <p className="text-lg">{locale.diagramsTab}</p>
                   </div>
                 </CardTitle>
               </CardHeader>

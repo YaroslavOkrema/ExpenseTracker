@@ -21,6 +21,8 @@
     "prev": "Попередня"
   },
   "analytics": {
+    "basicAnalytics": "Базова аналітика",
+    "movingAverage": "Ковзне середнє",
     "income": "Доходи",
     "expenses": "Витрати",
     "expenseRatio": "Витрати від доходу (%)",
@@ -29,7 +31,20 @@
     "maxExpense": "Найбільша витрата",
     "monthlyIncome": "Дохід за місяць",
     "monthlyExpense": "Витрати за місяць",
+    "avgExpense7": "Середні витрати за 7 днів",
+    "avgExpense30": "Середні витрати за 30 днів",
     "currency": "грн"
+  },
+  "analyticsCharts": {
+    "movingAverageTitle": "Ковзне середнє витрат",
+    "expenseIncomeTitle": "Діаграма витрат/доходів",
+    "movingAverage": "Ковзне середнє",
+    "expenseIncome": "Витрати/Доходи",
+    "noData": "Немає даних",
+    "dayExpense": "Витрати за день",
+    "weekExpense": "7-денне ковзне середнє",
+    "Expenses": "Витрати",
+    "Income": "Дохід"
   },
   "settings": {
     "mode": "Режим",

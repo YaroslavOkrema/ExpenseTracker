@@ -20,7 +20,7 @@ export function analyticsData(
 
   return [
     {
-      title: 'Базова аналітика', // Наприклад: "Базова аналітика"
+      title: locale.basicAnalytics,
       fields: [
         { label: locale.income, value: `${income} ${locale.currency}` },
         { label: locale.expenses, value: `${expenses} ${locale.currency}` },
@@ -40,14 +40,14 @@ export function analyticsData(
     },
 
     {
-      title: 'Ковзне середнє', // Наприклад: "Ковзне середнє"
+      title: locale.movingAverage,
       fields: [
         {
-          label: 'Середні витрати за 7 днів',
+          label: locale.avgExpense7,
           value: `${avgExpense7} ${locale.currency}`,
         },
         {
-          label: 'Середні витрати за 7 днів',
+          label: locale.avgExpense30,
           value: `${avgExpense30} ${locale.currency}`,
         },
       ],

@@ -6,6 +6,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts'
+import { JSX } from 'react'
+import { useLocales } from '@/context/LocalesContext'
 
 type Props = {
   income: number
@@ -14,10 +16,14 @@ type Props = {
 
 const COLORS = ['#4ade80', '#f87171']
 
-export default function IncomeExpensePie({ income, expenses }: Props) {
+export default function IncomeExpensePie({
+  income,
+  expenses,
+}: Props): JSX.Element {
+  const { translations } = useLocales()
   const data = [
-    { name: 'Дохід', value: income },
-    { name: 'Витрати', value: expenses },
+    { name: translations.analyticsCharts.Income, value: income },
+    { name: translations.analyticsCharts.Expenses, value: expenses },
   ]
 
   return (
