@@ -2,6 +2,7 @@
   "tracker": {
     "trackerTab": "Трекер Витрат",
     "analyticsTab": "Аналітика",
+    "diagramsTab": "Діаграми",
     "settingsTab": "Налаштування",
     "title": "Мій бюджет",
     "buttonAdd": "Додати транзакцію",

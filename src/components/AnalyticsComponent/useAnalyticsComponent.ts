@@ -7,6 +7,6 @@ export function useAnalyticsComponent(data: AnalyticsComponentProps) {
 
   return {
     locale: translations.analytics,
-    fields: analyticsData(data, translations.analytics),
+    sections: analyticsData(data, translations.analytics),
   }
 }

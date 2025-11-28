@@ -2,6 +2,7 @@
   "tracker": {
     "trackerTab": "Expense Tracker",
     "analyticsTab": "Analytics",
+    "diagramsTab": "Diagrams",
     "settingsTab": "Settings",
     "title": "My Budget",
     "buttonAdd": "Add Transaction",

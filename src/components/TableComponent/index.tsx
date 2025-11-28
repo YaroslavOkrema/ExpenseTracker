@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/table.tsx'
 import type { TableComponentProps } from '@/components/TableComponent/types.ts'
 import type { JSX } from 'react'
-import { TransactionType } from '@/types/enums.ts'
 import { Button } from '@/components/ui/button.tsx'
 import { Trash2 } from 'lucide-react'
 import { useTableComponent } from '@/components/TableComponent/useTableComponent.ts'
@@ -26,7 +25,7 @@ function TableComponent({
       <TableHeader>
         <TableRow>
           <TableHead>{locale.description}</TableHead>
-          <TableHead>{locale.type}</TableHead>
+          {/*<TableHead>{locale.type}</TableHead>*/}
           <TableHead>{locale.date}</TableHead>
           <TableHead className="text-right">{locale.sum}</TableHead>
         </TableRow>
@@ -44,11 +43,11 @@ function TableComponent({
               <TableCell className="font-medium">
                 {transaction.description}
               </TableCell>
-              <TableCell>
+              {/*<TableCell>
                 {transaction.type === TransactionType.INCOME
                   ? locale.income
                   : locale.expense}
-              </TableCell>
+              </TableCell>*/}
               <TableCell>{formatDate(transaction.date)}</TableCell>
               <TableCell
                 className={`text-right ${colorForSum(transaction.type)}`}

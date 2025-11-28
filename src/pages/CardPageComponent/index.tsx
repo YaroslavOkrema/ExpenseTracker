@@ -21,8 +21,13 @@ import ThemeSelect from '@/components/ThemeSelect'
 import AnalyticsComponent from '@/components/AnalyticsComponent'
 import { formatNumbers } from '@/utils/formatNumbers/formatNumbers.ts'
 import LanguageSelect from '@/components/LanguageSelect'
-import DiagramsComponent from '@/components/diagrams-component'
-import { ExpensesTrendChart } from '@/components/expenses-trend-chart'
+import AnalyticsCharts from '@/components/analytics-charts'
+import { TABS } from '@/constants/constants.ts'
+import MoneyIcon from '@/icons/money'
+import TransactionIcon from '@/icons/transaction'
+import AnalyticsIcon from '@/icons/analytics'
+import DiagramsIcon from '@/icons/diagrams'
+import SettingsIcon from '@/icons/settings'
 
 function CardPageComponent() {
   const {
@@ -55,18 +60,29 @@ function CardPageComponent() {
   return (
     <div className="flex justify-center items-center">
       <div className="flex w-full max-w-sm flex-col gap-6">
-        <Tabs defaultValue="expense">
+        <Tabs defaultValue={TABS.expense}>
           <TabsList>
-            <TabsTrigger value="expense">{locale.trackerTab}</TabsTrigger>
-            <TabsTrigger value="analytics">{locale.analyticsTab}</TabsTrigger>
-            <TabsTrigger value="diagrams">Діаграми</TabsTrigger>
-            <TabsTrigger value="settings">{locale.settingsTab}</TabsTrigger>
+            <TabsTrigger className="cursor-pointer" value={TABS.expense}>
+              {locale.trackerTab}
+            </TabsTrigger>
+            <TabsTrigger className="cursor-pointer" value={TABS.analytics}>
+              {locale.analyticsTab}
+            </TabsTrigger>
+            <TabsTrigger className="cursor-pointer" value={TABS.diagrams}>
+              {locale.diagramsTab}
+            </TabsTrigger>
+            <TabsTrigger className="cursor-pointer" value={TABS.settings}>
+              {locale.settingsTab}
+            </TabsTrigger>
           </TabsList>
-          <TabsContent value="expense">
-            <Card className="w-md">
+          <TabsContent value={TABS.expense}>
+            <Card className="h-[555px]">
               <CardHeader>
                 <CardTitle className="text-center text-xl mb-4">
-                  {locale.title}
+                  <div className="flex justify-center items-center gap-2">
+                    <MoneyIcon />
+                    {locale.title}
+                  </div>
                 </CardTitle>
                 <div className="text-4xl text-center mb-4">
                   {formatNumbers(balance)} ₴
@@ -83,7 +99,12 @@ function CardPageComponent() {
                   />
                 ) : (
                   <div>
-                    <Label className="mb-4">{locale.listTitle}</Label>
+                    <Label className="mb-4">
+                      <div className="flex justify-center items-center gap-2">
+                        <TransactionIcon />
+                        {locale.listTitle}
+                      </div>
+                    </Label>
                     <TableComponent
                       transactions={paginatedTransactions}
                       removeTransaction={removeTransactions}
@@ -100,10 +121,15 @@ function CardPageComponent() {
               </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="analytics">
-            <Card className="w-full max-w-sm">
+          <TabsContent value={TABS.analytics}>
+            <Card className="h-[555px]">
               <CardHeader>
-                <CardTitle>{locale.analyticsTab}</CardTitle>
+                <CardTitle>
+                  <div className="flex items-center gap-2">
+                    <AnalyticsIcon />
+                    {locale.analyticsTab}
+                  </div>
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <AnalyticsComponent
@@ -121,10 +147,15 @@ function CardPageComponent() {
               </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="settings">
-            <Card className="w-full max-w-sm">
+          <TabsContent value={TABS.settings}>
+            <Card className="h-[555px]">
               <CardHeader>
-                <CardTitle>{locale.settingsTab}</CardTitle>
+                <CardTitle>
+                  <div className="flex items-center gap-2">
+                    <SettingsIcon />
+                    {locale.settingsTab}
+                  </div>
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <ThemeSelect />
@@ -132,32 +163,22 @@ function CardPageComponent() {
               </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="diagrams">
-            <Card className="w-full max-w-sm">
+          <TabsContent value={TABS.diagrams}>
+            <Card className="h-[555px]">
               <CardHeader>
-                <CardTitle>Діаграми</CardTitle>
+                <CardTitle>
+                  <div className="flex items-center gap-2">
+                    <DiagramsIcon />
+                    {locale.diagramsTab}
+                  </div>
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                {/*<DiagramsComponent income={income} expenses={expenses} />*/}
-                {/*<ExpensesTrendChart transactions={transactions} />*/}
-                <div className="flex w-full max-w-sm flex-col gap-6">
-                  <Tabs defaultValue="expensesIncome">
-                    <TabsList>
-                      <TabsTrigger value="expensesIncome">
-                        Витрати/Доходи
-                      </TabsTrigger>
-                      <TabsTrigger value="movingAvarage">
-                        Ковзне середнє
-                      </TabsTrigger>
-                    </TabsList>
-                    <TabsContent value="expensesIncome">
-                      <DiagramsComponent income={income} expenses={expenses} />
-                    </TabsContent>
-                    <TabsContent value="movingAvarage">
-                      <ExpensesTrendChart transactions={transactions} />
-                    </TabsContent>
-                  </Tabs>
-                </div>
+                <AnalyticsCharts
+                  transactions={transactions}
+                  income={income}
+                  expenses={expenses}
+                />
               </CardContent>
             </Card>
           </TabsContent>
