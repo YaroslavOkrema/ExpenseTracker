@@ -2,6 +2,7 @@
   "tracker": {
     "trackerTab": "Expense Tracker",
     "analyticsTab": "Analytics",
+    "diagramsTab": "Diagrams",
     "settingsTab": "Settings",
     "title": "My Budget",
     "buttonAdd": "Add Transaction",
@@ -12,6 +13,7 @@
     "descriptionPlaceholder": "For example: Groceries",
     "sum": "Amount",
     "type": "Type",
+    "date": "Date",
     "income": "Income",
     "expense": "Expense",
     "noTransactions": "No transactions",
@@ -19,13 +21,34 @@
     "prev": "Previous"
   },
   "analytics": {
+    "basicAnalytics": "Basic Analytics",
+    "movingAverage": "Moving Average",
     "income": "Income",
     "expenses": "Expenses",
     "expenseRatio": "Expenses to Income (%)",
     "savingRates": "Savings (%)",
     "maxIncome": "Maximum Income",
     "maxExpense": "Maximum Expense",
+    "monthlyIncome": "Monthly income",
+    "monthlyExpense": "Monthly expenses",
+    "avgExpense7": "Average expenses over 7 days",
+    "avgExpense30": "Average expenses over 30 days",
+    "predictedTomorrow": "Forecast for tomorrow",
+    "predictedWeek": "Weekly forecast",
+    "predictedMonth": "Monthly forecast",
     "currency": "UAH"
+  },
+  "analyticsCharts": {
+    "movingAverageTitle": "Expense Moving Average",
+    "expenseIncomeTitle": "Expenses/Income Chart",
+    "movingAverage": "Moving average",
+    "expenseIncome": "Expense/Income",
+    "noData": "No data available",
+    "dayExpense": "Daily expenses",
+    "weekExpense": "7-days moving average",
+    "monthExpense": "30-days moving average",
+    "Expenses": "Expenses",
+    "Income": "Income"
   },
   "settings": {
     "mode": "Mode",
@@ -33,5 +56,9 @@
     "light": "Light",
     "system": "System",
     "language": "Language"
+  },
+  "toasts": {
+    "success": "Transaction successfully added",
+    "remove": "Transaction successfully deleted"
   }
 }

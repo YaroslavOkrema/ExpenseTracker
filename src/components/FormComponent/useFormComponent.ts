@@ -4,6 +4,7 @@ import type { FormProps } from '@/components/FormComponent/types.ts'
 import { DEFAULT_VALUES } from '@/constants/constants.ts'
 import { saveTransactions } from '@/utils/localeStorage/localeStorage.ts'
 import { useLocales } from '@/context/LocalesContext'
+import { toast } from 'sonner'
 
 export const useFormComponent = ({
   setShowForm,
@@ -19,17 +20,24 @@ export const useFormComponent = ({
     const newTransaction: Data = {
       ...data,
       id: crypto.randomUUID(),
+      date: new Date().toISOString(),
     }
 
     setTransaction(prev => {
       const transaction = [newTransaction, ...prev]
 
+      const sorted = [...transaction].sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime()
+      })
+
       saveTransactions(transaction)
 
-      return transaction
+      return sorted
     })
     reset()
     setShowForm(false)
+
+    toast.success(translations.toasts.success)
   }
 
   return {

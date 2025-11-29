@@ -6,6 +6,7 @@ import {
   calculateIncome,
   calculateMaxExpense,
   calculateMaxIncome,
+  calculateMonthlyTransactions,
   calculateSavingRates,
 } from '@/pages/CardPageComponent/helpers.ts'
 import {
@@ -18,6 +19,9 @@ import {
   ITEMS_PER_PAGE,
 } from '@/pages/CardPageComponent/constants.ts'
 import { useLocales } from '@/context/LocalesContext'
+import { toast } from 'sonner'
+import { getDailyExpenses } from '@/utils/daily-expenses'
+import { movingAverage } from '@/utils/moving-average'
 
 export const useCardPageComponent = () => {
   const [showForm, setShowForm] = useState<boolean>(false)
@@ -47,6 +51,13 @@ export const useCardPageComponent = () => {
     savingRates,
     maxIncome,
     maxExpense,
+    monthlyIncome,
+    monthlyExpenses,
+    avgExpense7,
+    avgExpense30,
+    predictedTomorrow,
+    predictedWeek,
+    predictedMonth,
   } = useMemo(() => {
     const income = calculateIncome(transactions)
 
@@ -62,6 +73,25 @@ export const useCardPageComponent = () => {
 
     const maxExpense = calculateMaxExpense(transactions)
 
+    const monthly = calculateMonthlyTransactions(transactions)
+
+    const monthlyIncome = calculateIncome(monthly)
+
+    const monthlyExpenses = calculateExpense(monthly)
+
+    const daily = getDailyExpenses(transactions)
+    const dailyValues = daily.map(d => d.expense)
+
+    const ma7 = movingAverage(dailyValues, 7)
+    const ma30 = movingAverage(dailyValues, 30)
+
+    const avgExpense7 = ma7.length ? ma7[ma7.length - 1] : 0
+    const avgExpense30 = ma30.length ? ma30[ma30.length - 1] : 0
+
+    const predictedTomorrow = avgExpense7
+    const predictedWeek = avgExpense7 * 7
+    const predictedMonth = avgExpense30 * 30
+
     return {
       income,
       expenses,
@@ -70,6 +100,13 @@ export const useCardPageComponent = () => {
       savingRates,
       maxIncome,
       maxExpense,
+      monthlyIncome,
+      monthlyExpenses,
+      avgExpense7,
+      avgExpense30,
+      predictedTomorrow,
+      predictedWeek,
+      predictedMonth,
     }
   }, [transactions])
 
@@ -83,6 +120,8 @@ export const useCardPageComponent = () => {
       Math.ceil(next.length / ITEMS_PER_PAGE),
     )
     if (page > nextTotal) setPage(nextTotal)
+
+    toast.success(translations.toasts.remove)
   }
 
   const handlePageChange = (newPage: number): void => {
@@ -140,6 +179,13 @@ export const useCardPageComponent = () => {
     savingRates,
     maxIncome,
     maxExpense,
+    monthlyIncome,
+    monthlyExpenses,
+    avgExpense7,
+    avgExpense30,
+    predictedTomorrow,
+    predictedWeek,
+    predictedMonth,
     locale: translations.tracker,
   }
 }

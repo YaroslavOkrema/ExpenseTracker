@@ -15,3 +15,12 @@ export const TRANSLATIONS = {
   [Language.UA]: UAJSON,
   [Language.EN]: ENJSON,
 }
+
+export const DEFAULT_ICON_SIZE = 18
+
+export enum TABS {
+  expense = 'expense',
+  analytics = 'analytics',
+  diagrams = 'diagrams',
+  settings = 'settings',
+}

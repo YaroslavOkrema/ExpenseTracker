@@ -2,6 +2,7 @@
   "tracker": {
     "trackerTab": "Трекер Витрат",
     "analyticsTab": "Аналітика",
+    "diagramsTab": "Діаграми",
     "settingsTab": "Налаштування",
     "title": "Мій бюджет",
     "buttonAdd": "Додати транзакцію",
@@ -12,6 +13,7 @@
     "descriptionPlaceholder": "Наприклад: Продукти",
     "sum": "Сума",
     "type": "Тип",
+    "date": "Дата",
     "income": "Дохід",
     "expense": "Витрата",
     "noTransactions": "Немає транзакцій",
@@ -19,13 +21,34 @@
     "prev": "Попередня"
   },
   "analytics": {
+    "basicAnalytics": "Базова аналітика",
+    "movingAverage": "Ковзне середнє",
     "income": "Доходи",
     "expenses": "Витрати",
     "expenseRatio": "Витрати від доходу (%)",
     "savingRates": "Заощадження (%)",
     "maxIncome": "Найбільший дохід",
     "maxExpense": "Найбільша витрата",
+    "monthlyIncome": "Дохід за місяць",
+    "monthlyExpense": "Витрати за місяць",
+    "avgExpense7": "Середні витрати за 7 днів",
+    "avgExpense30": "Середні витрати за 30 днів",
+    "predictedTomorrow": "Прогноз на завтра",
+    "predictedWeek": "Прогноз на тиждень",
+    "predictedMonth": "Прогноз на місяць",
     "currency": "грн"
+  },
+  "analyticsCharts": {
+    "movingAverageTitle": "Ковзне середнє витрат",
+    "expenseIncomeTitle": "Діаграма витрат/доходів",
+    "movingAverage": "Ковзне середнє",
+    "expenseIncome": "Витрати/Доходи",
+    "noData": "Немає даних",
+    "dayExpense": "Витрати за день",
+    "weekExpense": "7-денне ковзне середнє",
+    "monthExpense": "30-денне ковзне середнє",
+    "Expenses": "Витрати",
+    "Income": "Дохід"
   },
   "settings": {
     "mode": "Режим",
@@ -33,5 +56,9 @@
     "light": "Світла",
     "system": "Системна",
     "language": "Мова"
+  },
+  "toasts": {
+    "success": "Транзакція успішно додана",
+    "remove": "Транзакція успішно видалена"
   }
 }
