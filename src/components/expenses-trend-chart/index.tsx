@@ -68,6 +68,14 @@ export function ExpensesTrendChart({ transactions }: Props): JSX.Element {
                 strokeWidth={2}
                 dot={false}
               />
+              <Line
+                type="monotone"
+                dataKey="ma30"
+                name={translations.analyticsCharts.monthExpense}
+                stroke="#ffb347"
+                strokeWidth={2}
+                dot={false}
+              />
             </LineChart>
           </ResponsiveContainer>
         </div>

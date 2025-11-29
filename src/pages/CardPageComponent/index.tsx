@@ -55,6 +55,9 @@ function CardPageComponent() {
     avgExpense7,
     avgExpense30,
     transactions,
+    predictedTomorrow,
+    predictedWeek,
+    predictedMonth,
   } = useCardPageComponent()
 
   return (
@@ -143,6 +146,9 @@ function CardPageComponent() {
                   monthlyExpense={monthlyExpenses}
                   avgExpense7={avgExpense7}
                   avgExpense30={avgExpense30}
+                  predictedTomorrow={predictedTomorrow}
+                  predictedWeek={predictedWeek}
+                  predictedMonth={predictedMonth}
                 />
               </CardContent>
             </Card>

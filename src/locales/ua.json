@@ -33,6 +33,9 @@
     "monthlyExpense": "Витрати за місяць",
     "avgExpense7": "Середні витрати за 7 днів",
     "avgExpense30": "Середні витрати за 30 днів",
+    "predictedTomorrow": "Прогноз на завтра",
+    "predictedWeek": "Прогноз на тиждень",
+    "predictedMonth": "Прогноз на місяць",
     "currency": "грн"
   },
   "analyticsCharts": {
@@ -43,6 +46,7 @@
     "noData": "Немає даних",
     "dayExpense": "Витрати за день",
     "weekExpense": "7-денне ковзне середнє",
+    "monthExpense": "30-денне ковзне середнє",
     "Expenses": "Витрати",
     "Income": "Дохід"
   },

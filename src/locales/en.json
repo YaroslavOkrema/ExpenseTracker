@@ -33,6 +33,9 @@
     "monthlyExpense": "Monthly expenses",
     "avgExpense7": "Average expenses over 7 days",
     "avgExpense30": "Average expenses over 30 days",
+    "predictedTomorrow": "Forecast for tomorrow",
+    "predictedWeek": "Weekly forecast",
+    "predictedMonth": "Monthly forecast",
     "currency": "UAH"
   },
   "analyticsCharts": {
@@ -42,7 +45,8 @@
     "expenseIncome": "Expense/Income",
     "noData": "No data available",
     "dayExpense": "Daily expenses",
-    "weekExpense": "7-day moving average",
+    "weekExpense": "7-days moving average",
+    "monthExpense": "30-days moving average",
     "Expenses": "Expenses",
     "Income": "Income"
   },

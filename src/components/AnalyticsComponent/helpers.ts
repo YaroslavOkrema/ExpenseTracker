@@ -16,10 +16,14 @@ export function analyticsData(
     monthlyExpense,
     avgExpense7,
     avgExpense30,
+    predictedTomorrow,
+    predictedWeek,
+    predictedMonth,
   } = data
 
   return [
     {
+      id: 'basic',
       title: locale.basicAnalytics,
       fields: [
         { label: locale.income, value: `${income} ${locale.currency}` },
@@ -40,6 +44,7 @@ export function analyticsData(
     },
 
     {
+      id: 'movingAverage',
       title: locale.movingAverage,
       fields: [
         {
@@ -49,6 +54,18 @@ export function analyticsData(
         {
           label: locale.avgExpense30,
           value: `${avgExpense30} ${locale.currency}`,
+        },
+        {
+          label: locale.predictedTomorrow,
+          value: `${predictedTomorrow} ${locale.currency}`,
+        },
+        {
+          label: locale.predictedWeek,
+          value: `${predictedWeek} ${locale.currency}`,
+        },
+        {
+          label: locale.predictedMonth,
+          value: `${predictedMonth} ${locale.currency}`,
         },
       ],
     },

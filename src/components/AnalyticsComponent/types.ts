@@ -9,4 +9,7 @@ export type AnalyticsComponentProps = {
   monthlyExpense: number
   avgExpense7: number
   avgExpense30: number
+  predictedTomorrow: number
+  predictedWeek: number
+  predictedMonth: number
 }

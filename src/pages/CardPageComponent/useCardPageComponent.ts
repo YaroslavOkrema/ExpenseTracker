@@ -55,6 +55,9 @@ export const useCardPageComponent = () => {
     monthlyExpenses,
     avgExpense7,
     avgExpense30,
+    predictedTomorrow,
+    predictedWeek,
+    predictedMonth,
   } = useMemo(() => {
     const income = calculateIncome(transactions)
 
@@ -83,7 +86,11 @@ export const useCardPageComponent = () => {
     const ma30 = movingAverage(dailyValues, 30)
 
     const avgExpense7 = ma7.length ? ma7[ma7.length - 1] : 0
-    const avgExpense30 = ma30.length ? ma30[ma7.length - 1] : 0
+    const avgExpense30 = ma30.length ? ma30[ma30.length - 1] : 0
+
+    const predictedTomorrow = avgExpense7
+    const predictedWeek = avgExpense7 * 7
+    const predictedMonth = avgExpense30 * 30
 
     return {
       income,
@@ -97,6 +104,9 @@ export const useCardPageComponent = () => {
       monthlyExpenses,
       avgExpense7,
       avgExpense30,
+      predictedTomorrow,
+      predictedWeek,
+      predictedMonth,
     }
   }, [transactions])
 
@@ -173,6 +183,9 @@ export const useCardPageComponent = () => {
     monthlyExpenses,
     avgExpense7,
     avgExpense30,
+    predictedTomorrow,
+    predictedWeek,
+    predictedMonth,
     locale: translations.tracker,
   }
 }
