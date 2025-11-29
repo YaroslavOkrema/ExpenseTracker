@@ -22,6 +22,7 @@ import { useLocales } from '@/context/LocalesContext'
 import { toast } from 'sonner'
 import { getDailyExpenses } from '@/utils/daily-expenses'
 import { movingAverage } from '@/utils/moving-average'
+import { getVisiblePageNumbers } from '@/components/PaginationComponent/helpers.ts'
 
 export const useCardPageComponent = () => {
   const [showForm, setShowForm] = useState<boolean>(false)
@@ -153,8 +154,8 @@ export const useCardPageComponent = () => {
   }
 
   const pageNumbers = useMemo(
-    () => Array.from({ length: totalPages }, (_, i) => i + 1),
-    [totalPages],
+    () => getVisiblePageNumbers(page, totalPages),
+    [page, totalPages],
   )
 
   return {
