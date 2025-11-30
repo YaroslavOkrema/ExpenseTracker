@@ -10,7 +10,7 @@ import {
   calculateSavingRates,
 } from '@/pages/CardPageComponent/helpers.ts'
 import {
-  getTransactions,
+  // getTransactions,
   saveTransactions,
 } from '@/utils/localeStorage/localeStorage.ts'
 import * as React from 'react'
@@ -23,10 +23,11 @@ import { toast } from 'sonner'
 import { getDailyExpenses } from '@/utils/daily-expenses'
 import { movingAverage } from '@/utils/moving-average'
 import { getVisiblePageNumbers } from '@/components/PaginationComponent/helpers.ts'
+import { mockTransactions } from '@/mock/mockTransactions.ts'
 
 export const useCardPageComponent = () => {
   const [showForm, setShowForm] = useState<boolean>(false)
-  const [transactions, setTransaction] = useState<Data[]>(getTransactions())
+  const [transactions, setTransaction] = useState<Data[]>(mockTransactions)
   const [page, setPage] = useState<number>(DEFAULT_PAGE)
 
   const { translations } = useLocales()

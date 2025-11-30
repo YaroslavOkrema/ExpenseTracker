@@ -2,7 +2,6 @@ import { TransactionType } from '@/types/enums'
 import type { Data } from '@/types/types'
 
 export const mockTransactions: Data[] = [
-  // 💰 ДОХОДИ
   {
     id: 'i1',
     description: 'Зарплата',
@@ -24,8 +23,6 @@ export const mockTransactions: Data[] = [
     type: TransactionType.INCOME,
     date: '2025-11-16',
   },
-
-  // 💸 ВИТРАТИ (останні 30 днів)
   {
     id: 'e1',
     description: 'Продукти',
