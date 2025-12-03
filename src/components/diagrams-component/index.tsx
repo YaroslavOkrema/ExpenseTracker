@@ -1,6 +1,6 @@
-import IncomeExpensePie from '@/components/income-expense-pie'
 import { JSX } from 'react'
 import { useLocales } from '@/context/LocalesContext'
+import { IncomeExpensePie } from '@/components/income-expense-pie'
 
 type DiagramsComponentProps = {
   income: number
