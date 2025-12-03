@@ -79,7 +79,7 @@ function CardPageComponent() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value={TABS.expense}>
-            <Card className="h-[555px]">
+            <Card className="h-[555px] flex flex-col">
               <CardHeader>
                 <CardTitle className="text-center text-xl mb-4">
                   <div className="flex justify-center items-center gap-2">
@@ -125,7 +125,7 @@ function CardPageComponent() {
             </Card>
           </TabsContent>
           <TabsContent value={TABS.analytics}>
-            <Card className="h-[555px]">
+            <Card className="h-[555px] flex flex-col">
               <CardHeader>
                 <CardTitle>
                   <div className="flex items-center gap-2">
@@ -134,7 +134,7 @@ function CardPageComponent() {
                   </div>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="overflow-y-auto h-full custom-scroll">
                 <AnalyticsComponent
                   income={income}
                   expenses={expenses}
@@ -170,7 +170,7 @@ function CardPageComponent() {
             </Card>
           </TabsContent>
           <TabsContent value={TABS.diagrams}>
-            <Card className="h-[555px]">
+            <Card className="h-[555px] flex flex-col">
               <CardHeader>
                 <CardTitle>
                   <div className="flex items-center gap-2">
@@ -179,7 +179,7 @@ function CardPageComponent() {
                   </div>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="overflow-y-auto h-full custom-scroll">
                 <AnalyticsCharts
                   transactions={transactions}
                   income={income}
