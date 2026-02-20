@@ -18,7 +18,15 @@
     "expense": "Витрата",
     "noTransactions": "Немає транзакцій",
     "next": "Наступна",
-    "prev": "Попередня"
+    "prev": "Попередня",
+    "converterTab": "Конвертер"
+  },
+  "converter": {
+    "amount": "Сума",
+    "from": "З валюти",
+    "to": "У валюту",
+    "result": "Результат",
+    "convertButton": "Конвертувати"
   },
   "analytics": {
     "basicAnalytics": "Базова аналітика",

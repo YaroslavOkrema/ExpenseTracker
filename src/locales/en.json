@@ -18,7 +18,15 @@
     "expense": "Expense",
     "noTransactions": "No transactions",
     "next": "Next",
-    "prev": "Previous"
+    "prev": "Previous",
+    "converterTab": "Converter"
+  },
+  "converter": {
+    "amount": "Amount",
+    "from": "From",
+    "to": "To",
+    "result": "Result",
+    "convertButton": "Convert"
   },
   "analytics": {
     "basicAnalytics": "Basic Analytics",
