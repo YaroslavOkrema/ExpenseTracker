@@ -10,20 +10,46 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { getChartConfig } from '@/components/expenses-trend-chart/helpers.ts'
 import { ExpensesTrendChartProps } from '@/components/expenses-trend-chart/types.ts'
+import { MASettingsMode } from '@/utils/moving-average'
 
 export function ExpensesTrendChart({
   transactions,
 }: ExpensesTrendChartProps): JSX.Element {
-  const { daily, chartData } = useExpensesTrendChart(transactions)
+  const { daily, chartData, mode, setMode, activeMethod } = useExpensesTrendChart(transactions)
   const { translations } = useLocales()
   const chartConfig = getChartConfig(translations.analyticsCharts)
 
   return (
     <div className="mt-4">
-      <div className="text-center mb-4">
-        {translations.analyticsCharts.movingAverageTitle}
+      <div className="flex items-center justify-between mb-4">
+        <div className="text-sm font-medium flex items-center gap-2">
+          {translations.analyticsCharts.movingAverageTitle}
+          {mode === 'AUTO' && (
+            <span className="text-[10px] bg-muted px-1.5 py-0.5 rounded text-muted-foreground">
+              {activeMethod}
+            </span>
+          )}
+        </div>
+        <Select value={mode} onValueChange={(val) => setMode(val as MASettingsMode)}>
+          <SelectTrigger className="w-[90px] h-7 text-xs">
+            <SelectValue placeholder="Mode" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="SMA" className="text-xs">SMA</SelectItem>
+            <SelectItem value="EMA" className="text-xs">EMA</SelectItem>
+            <SelectItem value="WMA" className="text-xs">WMA</SelectItem>
+            <SelectItem value="AUTO" className="text-xs">Auto</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
       {!daily.length ? (
         <>

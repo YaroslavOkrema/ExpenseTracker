@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import type { Data } from '@/types/types'
 import {
     calculateExpense,
@@ -10,9 +10,21 @@ import {
     calculateSavingRates,
 } from '@/pages/CardPageComponent/helpers'
 import { getDailyExpenses } from '@/utils/daily-expenses'
-import { movingAverage } from '@/utils/moving-average'
+import { getMovingAverage, MASettingsMode } from '@/utils/moving-average'
 
 export const useFinancialMetrics = (transactions: Data[]) => {
+    const [mode, setMode] = useState<MASettingsMode>(() => {
+        return (localStorage.getItem('ma_settings_mode') as MASettingsMode) || 'AUTO'
+    })
+
+    useEffect(() => {
+        const handleSettingsChange = () => {
+            setMode((localStorage.getItem('ma_settings_mode') as MASettingsMode) || 'AUTO')
+        }
+        window.addEventListener('ma_settings_changed', handleSettingsChange)
+        return () => window.removeEventListener('ma_settings_changed', handleSettingsChange)
+    }, [])
+
     return useMemo(() => {
         const income = calculateIncome(transactions)
         const expenses = calculateExpense(transactions)
@@ -30,8 +42,8 @@ export const useFinancialMetrics = (transactions: Data[]) => {
         const daily = getDailyExpenses(transactions)
         const dailyValues = daily.map(d => d.expense)
 
-        const ma7 = movingAverage(dailyValues, 7)
-        const ma30 = movingAverage(dailyValues, 30)
+        const ma7 = getMovingAverage(dailyValues, 7, mode)
+        const ma30 = getMovingAverage(dailyValues, 30, mode)
 
         const avgExpense7 = ma7.length ? ma7[ma7.length - 1] : 0
         const avgExpense30 = ma30.length ? ma30[ma30.length - 1] : 0
@@ -56,5 +68,5 @@ export const useFinancialMetrics = (transactions: Data[]) => {
             predictedWeek,
             predictedMonth,
         }
-    }, [transactions])
+    }, [transactions, mode])
 }
