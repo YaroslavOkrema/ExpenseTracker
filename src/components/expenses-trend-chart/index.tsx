@@ -24,15 +24,16 @@ import { MASettingsMode } from '@/utils/moving-average'
 export function ExpensesTrendChart({
   transactions,
 }: ExpensesTrendChartProps): JSX.Element {
-  const { daily, chartData, mode, setMode, activeMethod } = useExpensesTrendChart(transactions)
+  const { daily, chartData, mode, setMode, activeMethod, allModelsMetrics } = useExpensesTrendChart(transactions)
   const { translations } = useLocales()
   const chartConfig = getChartConfig(translations.analyticsCharts)
+  const t = translations.analyticsCharts
 
   return (
     <div className="mt-4">
       <div className="flex items-center justify-between mb-4">
         <div className="text-sm font-medium flex items-center gap-2">
-          {translations.analyticsCharts.movingAverageTitle}
+          {t.movingAverageTitle}
           {mode === 'AUTO' && (
             <span className="text-[10px] bg-muted px-1.5 py-0.5 rounded text-muted-foreground">
               {activeMethod}
@@ -51,10 +52,49 @@ export function ExpensesTrendChart({
           </SelectContent>
         </Select>
       </div>
+
+      {mode === 'AUTO' && allModelsMetrics && (
+        <div className="mb-4 rounded-lg border bg-muted/40 overflow-hidden">
+          <p className="text-[10px] font-medium text-muted-foreground px-3 pt-2 pb-1 uppercase tracking-wide">
+            {t.errorMetricsTitle}
+          </p>
+          <table className="w-full text-xs border-t">
+            <thead>
+              <tr className="text-muted-foreground">
+                <th className="text-left px-3 py-1.5 font-semibold w-[30%]">{t.model}</th>
+                <th className="text-left px-3 py-1.5 font-semibold w-[23%]">{t.mae}</th>
+                <th className="text-left px-3 py-1.5 font-semibold w-[23%]">{t.mse}</th>
+                <th className="text-left px-3 py-1.5 font-semibold w-[24%]">{t.mape}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {allModelsMetrics.map((row) => (
+                <tr
+                  key={row.method}
+                  className={`border-t transition-colors ${
+                    row.isWinner
+                      ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                      : 'text-foreground'
+                  }`}
+                >
+                  <td className="px-3 py-1.5 font-semibold flex items-center gap-1">
+                    {row.isWinner && <span aria-label="winner">🏆</span>}
+                    {row.method}
+                  </td>
+                  <td className="px-3 py-1.5 font-mono tabular-nums">{row.metrics.mae.toFixed(2)}</td>
+                  <td className="px-3 py-1.5 font-mono tabular-nums">{row.metrics.mse.toFixed(2)}</td>
+                  <td className="px-3 py-1.5 font-mono tabular-nums">{row.metrics.mape.toFixed(2)}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
       {!daily.length ? (
         <>
           <p className="text-sm text-muted-foreground text-center">
-            {translations.analyticsCharts.noData}
+            {t.noData}
           </p>
         </>
       ) : (
@@ -84,7 +124,7 @@ export function ExpensesTrendChart({
               <Area
                 type="natural"
                 dataKey="expense"
-                name={translations.analyticsCharts.dayExpense}
+                name={t.dayExpense}
                 fill="var(--chart-1)"
                 fillOpacity={0.3}
                 stroke="var(--chart-1)"
@@ -93,7 +133,7 @@ export function ExpensesTrendChart({
               <Area
                 type="natural"
                 dataKey="ma7"
-                name={translations.analyticsCharts.weekExpense}
+                name={t.weekExpense}
                 fill="var(--chart-2)"
                 fillOpacity={0.3}
                 stroke="var(--chart-2)"
@@ -102,7 +142,7 @@ export function ExpensesTrendChart({
               <Area
                 type="natural"
                 dataKey="ma30"
-                name={translations.analyticsCharts.monthExpense}
+                name={t.monthExpense}
                 fill="var(--chart-3)"
                 fillOpacity={0.3}
                 stroke="var(--chart-3)"

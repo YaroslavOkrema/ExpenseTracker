@@ -56,7 +56,12 @@
     "weekExpense": "7-денне ковзне середнє",
     "monthExpense": "30-денне ковзне середнє",
     "Expenses": "Витрати",
-    "Income": "Дохід"
+    "Income": "Дохід",
+    "errorMetricsTitle": "Якість прогнозу (7-денне вікно)",
+    "model": "Модель",
+    "mae": "MAE",
+    "mse": "MSE",
+    "mape": "MAPE"
   },
   "settings": {
     "mode": "Режим",

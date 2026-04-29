@@ -97,6 +97,31 @@ function calculateMAE(actualValues: number[], predictedValues: number[]): number
   return errorSum / (actualValues.length - 1);
 }
 
+// Допоміжна функція: обчислює Mean Squared Error (MSE).
+function calculateMSE(actualValues: number[], predictedValues: number[]): number {
+  if (actualValues.length <= 1) return Infinity;
+  let errorSum = 0;
+  for (let i = 1; i < actualValues.length; i++) {
+    const diff = actualValues[i] - predictedValues[i - 1];
+    errorSum += diff * diff;
+  }
+  return errorSum / (actualValues.length - 1);
+}
+
+// Допоміжна функція: обчислює Mean Absolute Percentage Error (MAPE), у відсотках.
+function calculateMAPE(actualValues: number[], predictedValues: number[]): number {
+  if (actualValues.length <= 1) return Infinity;
+  let errorSum = 0;
+  let count = 0;
+  for (let i = 1; i < actualValues.length; i++) {
+    const actual = actualValues[i];
+    if (actual === 0) continue; // уникаємо ділення на нуль
+    errorSum += Math.abs((actual - predictedValues[i - 1]) / actual);
+    count++;
+  }
+  return count === 0 ? Infinity : (errorSum / count) * 100;
+}
+
 export type MAMethod = 'SMA' | 'EMA' | 'WMA';
 export type MASettingsMode = MAMethod | 'AUTO';
 
@@ -104,9 +129,17 @@ export type MASettingsMode = MAMethod | 'AUTO';
  * Тестує всі 3 алгоритми на історичних даних (фактично обчислює MAE 
  * за минулими днями) та повертає метод, що прогнозував найкраще.
  */
-export function autoSelectBestMA(values: number[], windowSize: number): { bestMethod: MAMethod; result: number[]; mae: number } {
+export type ErrorMetrics = { mae: number; mse: number; mape: number }
+
+export type ModelMetricsRow = {
+  method: MAMethod
+  metrics: ErrorMetrics
+  isWinner: boolean
+}
+
+export function autoSelectBestMA(values: number[], windowSize: number): { bestMethod: MAMethod; result: number[]; mae: number; metrics: ErrorMetrics } {
   if (values.length <= 1) {
-    return { bestMethod: 'SMA', result: sma(values, windowSize), mae: 0 };
+    return { bestMethod: 'SMA', result: sma(values, windowSize), mae: 0, metrics: { mae: 0, mse: 0, mape: 0 } };
   }
 
   const smaResult = sma(values, windowSize);
@@ -132,7 +165,61 @@ export function autoSelectBestMA(values: number[], windowSize: number): { bestMe
     bestResult = wmaResult;
   }
 
-  return { bestMethod, result: bestResult, mae: minMAE };
+  const metrics: ErrorMetrics = {
+    mae: Number(minMAE.toFixed(2)),
+    mse: Number(calculateMSE(values, bestResult).toFixed(2)),
+    mape: Number(calculateMAPE(values, bestResult).toFixed(2)),
+  };
+
+  return { bestMethod, result: bestResult, mae: minMAE, metrics };
+}
+
+/**
+ * Повертає метрики похибки для всіх трьох моделей (SMA, EMA, WMA) одночасно
+ * та позначає переможця (isWinner: true) за критерієм мінімального MAE.
+ */
+export function getAllModelsMetrics(values: number[], windowSize: number): { rows: ModelMetricsRow[]; bestMethod: MAMethod } {
+  const zero: ErrorMetrics = { mae: 0, mse: 0, mape: 0 };
+
+  if (values.length <= 1) {
+    return {
+      rows: [
+        { method: 'SMA', metrics: zero, isWinner: true },
+        { method: 'EMA', metrics: zero, isWinner: false },
+        { method: 'WMA', metrics: zero, isWinner: false },
+      ],
+      bestMethod: 'SMA',
+    };
+  }
+
+  const smaResult = sma(values, windowSize);
+  const emaResult = ema(values, windowSize);
+  const wmaResult = wma(values, windowSize);
+
+  const buildMetrics = (result: number[]): ErrorMetrics => ({
+    mae: Number(calculateMAE(values, result).toFixed(2)),
+    mse: Number(calculateMSE(values, result).toFixed(2)),
+    mape: Number(calculateMAPE(values, result).toFixed(2)),
+  });
+
+  const smaMetrics = buildMetrics(smaResult);
+  const emaMetrics = buildMetrics(emaResult);
+  const wmaMetrics = buildMetrics(wmaResult);
+
+  // Переможець за MAE
+  let bestMethod: MAMethod = 'SMA';
+  let minMAE = smaMetrics.mae;
+  if (emaMetrics.mae < minMAE) { minMAE = emaMetrics.mae; bestMethod = 'EMA'; }
+  if (wmaMetrics.mae < minMAE) { bestMethod = 'WMA'; }
+
+  return {
+    rows: [
+      { method: 'SMA', metrics: smaMetrics, isWinner: bestMethod === 'SMA' },
+      { method: 'EMA', metrics: emaMetrics, isWinner: bestMethod === 'EMA' },
+      { method: 'WMA', metrics: wmaMetrics, isWinner: bestMethod === 'WMA' },
+    ],
+    bestMethod,
+  };
 }
 
 /**

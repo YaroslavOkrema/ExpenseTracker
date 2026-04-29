@@ -1,5 +1,5 @@
 import { getDailyExpenses } from '@/utils/daily-expenses'
-import { getMovingAverage, autoSelectBestMA } from '@/utils/moving-average'
+import { getMovingAverage, autoSelectBestMA, getAllModelsMetrics, ModelMetricsRow } from '@/utils/moving-average'
 import { Data } from '@/types/types.ts'
 import { useMASettings } from '@/hooks/useMASettings.ts'
 
@@ -12,6 +12,7 @@ export function useExpensesTrendChart(transactions: Data[]) {
   let ma7: number[] = []
   let ma30: number[] = []
   let activeMethod = mode
+  let allModelsMetrics: ModelMetricsRow[] | null = null
 
   if (expenses.length > 0) {
     if (mode === 'AUTO') {
@@ -20,7 +21,9 @@ export function useExpensesTrendChart(transactions: Data[]) {
       ma7 = best7.result
       ma30 = best30.result
       // Display the winner for the short-term forecast
-      activeMethod = best7.bestMethod 
+      activeMethod = best7.bestMethod
+      // Build full comparison table based on 7-day window
+      allModelsMetrics = getAllModelsMetrics(expenses, 7).rows
     } else {
       ma7 = getMovingAverage(expenses, 7, mode)
       ma30 = getMovingAverage(expenses, 30, mode)
@@ -34,5 +37,5 @@ export function useExpensesTrendChart(transactions: Data[]) {
     ma30: ma30[index] ?? null,
   }))
 
-  return { daily, chartData, mode, setMode, activeMethod }
+  return { daily, chartData, mode, setMode, activeMethod, allModelsMetrics }
 }
