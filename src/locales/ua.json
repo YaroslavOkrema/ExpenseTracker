@@ -18,7 +18,15 @@
     "expense": "Витрата",
     "noTransactions": "Немає транзакцій",
     "next": "Наступна",
-    "prev": "Попередня"
+    "prev": "Попередня",
+    "converterTab": "Конвертер"
+  },
+  "converter": {
+    "amount": "Сума",
+    "from": "З валюти",
+    "to": "У валюту",
+    "result": "Результат",
+    "convertButton": "Конвертувати"
   },
   "analytics": {
     "basicAnalytics": "Базова аналітика",
@@ -48,7 +56,15 @@
     "weekExpense": "7-денне ковзне середнє",
     "monthExpense": "30-денне ковзне середнє",
     "Expenses": "Витрати",
-    "Income": "Дохід"
+    "Income": "Дохід",
+    "errorMetricsTitle": "Якість прогнозу (7-денне вікно)",
+    "model": "Модель",
+    "mae": "MAE",
+    "rmse": "RMSE",
+    "mape": "MAPE",
+    "maeTooltip": "В середньому прогноз помиляється на цю суму.",
+    "rmseTooltip": "Показує чутливість моделі до різких великих витрат.",
+    "mapeTooltip": "Розмір помилки у відсотках."
   },
   "settings": {
     "mode": "Режим",

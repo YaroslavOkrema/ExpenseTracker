@@ -23,4 +23,5 @@ export enum TABS {
   analytics = 'analytics',
   diagrams = 'diagrams',
   settings = 'settings',
+  converter = 'converter',
 }

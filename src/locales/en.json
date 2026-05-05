@@ -18,7 +18,15 @@
     "expense": "Expense",
     "noTransactions": "No transactions",
     "next": "Next",
-    "prev": "Previous"
+    "prev": "Previous",
+    "converterTab": "Converter"
+  },
+  "converter": {
+    "amount": "Amount",
+    "from": "From",
+    "to": "To",
+    "result": "Result",
+    "convertButton": "Convert"
   },
   "analytics": {
     "basicAnalytics": "Basic Analytics",
@@ -48,7 +56,15 @@
     "weekExpense": "7-days moving average",
     "monthExpense": "30-days moving average",
     "Expenses": "Expenses",
-    "Income": "Income"
+    "Income": "Income",
+    "errorMetricsTitle": "Forecast quality (7-day window)",
+    "model": "Model",
+    "mae": "MAE",
+    "rmse": "RMSE",
+    "mape": "MAPE",
+    "maeTooltip": "On average, the forecast is off by this amount.",
+    "rmseTooltip": "Shows the model's sensitivity to sudden large expenses.",
+    "mapeTooltip": "Error size as a percentage."
   },
   "settings": {
     "mode": "Mode",

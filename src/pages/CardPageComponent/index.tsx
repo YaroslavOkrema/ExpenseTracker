@@ -28,6 +28,7 @@ import TransactionIcon from '@/icons/transaction'
 import AnalyticsIcon from '@/icons/analytics'
 import DiagramsIcon from '@/icons/diagrams'
 import SettingsIcon from '@/icons/settings'
+import CurrencyConverter from '@/components/CurrencyConverter/CurrencyConverter.tsx'
 
 function CardPageComponent() {
   const {
@@ -76,6 +77,9 @@ function CardPageComponent() {
             </TabsTrigger>
             <TabsTrigger className="cursor-pointer" value={TABS.settings}>
               {locale.settingsTab}
+            </TabsTrigger>
+            <TabsTrigger className="cursor-pointer" value={TABS.converter}>
+              {locale.converterTab}
             </TabsTrigger>
           </TabsList>
           <TabsContent value={TABS.expense}>
@@ -186,6 +190,11 @@ function CardPageComponent() {
                   expenses={expenses}
                 />
               </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value={TABS.converter}>
+            <Card className="h-[555px]">
+              <CurrencyConverter />
             </Card>
           </TabsContent>
         </Tabs>
