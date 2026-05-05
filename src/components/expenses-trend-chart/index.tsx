@@ -17,6 +17,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import { Info } from 'lucide-react'
 import { getChartConfig } from '@/components/expenses-trend-chart/helpers.ts'
 import { ExpensesTrendChartProps } from '@/components/expenses-trend-chart/types.ts'
 import { MASettingsMode } from '@/utils/moving-average'
@@ -62,9 +68,45 @@ export function ExpensesTrendChart({
             <thead>
               <tr className="text-muted-foreground">
                 <th className="text-left px-3 py-1.5 font-semibold w-[30%]">{t.model}</th>
-                <th className="text-left px-3 py-1.5 font-semibold w-[23%]">{t.mae}</th>
-                <th className="text-left px-3 py-1.5 font-semibold w-[23%]">{t.mse}</th>
-                <th className="text-left px-3 py-1.5 font-semibold w-[24%]">{t.mape}</th>
+                <th className="text-left px-3 py-1.5 font-semibold w-[23%]">
+                  <div className="flex items-center gap-1.5">
+                    {t.mae}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Info className="w-3.5 h-3.5 text-muted-foreground/70 cursor-help" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{t.maeTooltip}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </th>
+                <th className="text-left px-3 py-1.5 font-semibold w-[23%]">
+                  <div className="flex items-center gap-1.5">
+                    {t.rmse}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Info className="w-3.5 h-3.5 text-muted-foreground/70 cursor-help" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{t.rmseTooltip}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </th>
+                <th className="text-left px-3 py-1.5 font-semibold w-[24%]">
+                  <div className="flex items-center gap-1.5">
+                    {t.mape}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Info className="w-3.5 h-3.5 text-muted-foreground/70 cursor-help" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{t.mapeTooltip}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -81,9 +123,9 @@ export function ExpensesTrendChart({
                     {row.isWinner && <span aria-label="winner">🏆</span>}
                     {row.method}
                   </td>
-                  <td className="px-3 py-1.5 font-mono tabular-nums">{row.metrics.mae.toFixed(2)}</td>
-                  <td className="px-3 py-1.5 font-mono tabular-nums">{row.metrics.mse.toFixed(2)}</td>
-                  <td className="px-3 py-1.5 font-mono tabular-nums">{row.metrics.mape.toFixed(2)}%</td>
+                  <td className="px-3 py-1.5 font-mono tabular-nums whitespace-nowrap">{row.metrics.mae.toLocaleString('uk-UA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₴</td>
+                  <td className="px-3 py-1.5 font-mono tabular-nums whitespace-nowrap">{row.metrics.rmse.toLocaleString('uk-UA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₴</td>
+                  <td className="px-3 py-1.5 font-mono tabular-nums whitespace-nowrap">{row.metrics.mape.toFixed(2)}%</td>
                 </tr>
               ))}
             </tbody>

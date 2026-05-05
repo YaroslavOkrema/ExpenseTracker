@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/providers/theme'
 import LocalesProvider from '@/providers/locales'
 import { LocalStorageKeys, Theme } from '@/types/enums.ts'
 import { Toaster } from 'sonner'
+import { TooltipProvider } from '@/components/ui/tooltip'
 
 function App() {
   return (
@@ -12,8 +13,10 @@ function App() {
         defaultTheme={Theme.LIGHT}
         storageKey={LocalStorageKeys.THEME}
       >
-        <CardPageComponent />
-        <Toaster />
+        <TooltipProvider>
+          <CardPageComponent />
+          <Toaster />
+        </TooltipProvider>
       </ThemeProvider>
     </LocalesProvider>
   )

@@ -97,15 +97,15 @@ function calculateMAE(actualValues: number[], predictedValues: number[]): number
   return errorSum / (actualValues.length - 1);
 }
 
-// Допоміжна функція: обчислює Mean Squared Error (MSE).
-function calculateMSE(actualValues: number[], predictedValues: number[]): number {
+// Допоміжна функція: обчислює Root Mean Squared Error (RMSE).
+function calculateRMSE(actualValues: number[], predictedValues: number[]): number {
   if (actualValues.length <= 1) return Infinity;
   let errorSum = 0;
   for (let i = 1; i < actualValues.length; i++) {
     const diff = actualValues[i] - predictedValues[i - 1];
     errorSum += diff * diff;
   }
-  return errorSum / (actualValues.length - 1);
+  return Math.sqrt(errorSum / (actualValues.length - 1));
 }
 
 // Допоміжна функція: обчислює Mean Absolute Percentage Error (MAPE), у відсотках.
@@ -129,7 +129,7 @@ export type MASettingsMode = MAMethod | 'AUTO';
  * Тестує всі 3 алгоритми на історичних даних (фактично обчислює MAE 
  * за минулими днями) та повертає метод, що прогнозував найкраще.
  */
-export type ErrorMetrics = { mae: number; mse: number; mape: number }
+export type ErrorMetrics = { mae: number; rmse: number; mape: number }
 
 export type ModelMetricsRow = {
   method: MAMethod
@@ -139,7 +139,7 @@ export type ModelMetricsRow = {
 
 export function autoSelectBestMA(values: number[], windowSize: number): { bestMethod: MAMethod; result: number[]; mae: number; metrics: ErrorMetrics } {
   if (values.length <= 1) {
-    return { bestMethod: 'SMA', result: sma(values, windowSize), mae: 0, metrics: { mae: 0, mse: 0, mape: 0 } };
+    return { bestMethod: 'SMA', result: sma(values, windowSize), mae: 0, metrics: { mae: 0, rmse: 0, mape: 0 } };
   }
 
   const smaResult = sma(values, windowSize);
@@ -167,7 +167,7 @@ export function autoSelectBestMA(values: number[], windowSize: number): { bestMe
 
   const metrics: ErrorMetrics = {
     mae: Number(minMAE.toFixed(2)),
-    mse: Number(calculateMSE(values, bestResult).toFixed(2)),
+    rmse: Number(calculateRMSE(values, bestResult).toFixed(2)),
     mape: Number(calculateMAPE(values, bestResult).toFixed(2)),
   };
 
@@ -179,7 +179,7 @@ export function autoSelectBestMA(values: number[], windowSize: number): { bestMe
  * та позначає переможця (isWinner: true) за критерієм мінімального MAE.
  */
 export function getAllModelsMetrics(values: number[], windowSize: number): { rows: ModelMetricsRow[]; bestMethod: MAMethod } {
-  const zero: ErrorMetrics = { mae: 0, mse: 0, mape: 0 };
+  const zero: ErrorMetrics = { mae: 0, rmse: 0, mape: 0 };
 
   if (values.length <= 1) {
     return {
@@ -198,7 +198,7 @@ export function getAllModelsMetrics(values: number[], windowSize: number): { row
 
   const buildMetrics = (result: number[]): ErrorMetrics => ({
     mae: Number(calculateMAE(values, result).toFixed(2)),
-    mse: Number(calculateMSE(values, result).toFixed(2)),
+    rmse: Number(calculateRMSE(values, result).toFixed(2)),
     mape: Number(calculateMAPE(values, result).toFixed(2)),
   });
 

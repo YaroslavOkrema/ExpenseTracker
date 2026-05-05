@@ -60,8 +60,11 @@
     "errorMetricsTitle": "Forecast quality (7-day window)",
     "model": "Model",
     "mae": "MAE",
-    "mse": "MSE",
-    "mape": "MAPE"
+    "rmse": "RMSE",
+    "mape": "MAPE",
+    "maeTooltip": "On average, the forecast is off by this amount.",
+    "rmseTooltip": "Shows the model's sensitivity to sudden large expenses.",
+    "mapeTooltip": "Error size as a percentage."
   },
   "settings": {
     "mode": "Mode",
