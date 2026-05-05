@@ -1,6 +1,13 @@
 import { AnalyticsComponentProps } from '@/components/AnalyticsComponent/types.ts'
 import { Locale } from '@/types/types.ts'
 
+const formatCurrency = (value: number) => {
+  return value.toLocaleString('uk-UA', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })
+}
+
 export function analyticsData(
   data: AnalyticsComponentProps,
   locale: Locale['analytics'],
@@ -49,23 +56,23 @@ export function analyticsData(
       fields: [
         {
           label: locale.avgExpense7,
-          value: `${avgExpense7} ${locale.currency}`,
+          value: `${formatCurrency(avgExpense7)} грн`,
         },
         {
           label: locale.avgExpense30,
-          value: `${avgExpense30} ${locale.currency}`,
+          value: `${formatCurrency(avgExpense30)} грн`,
         },
         {
           label: locale.predictedTomorrow,
-          value: `${predictedTomorrow} ${locale.currency}`,
+          value: `${formatCurrency(predictedTomorrow)} грн`,
         },
         {
           label: locale.predictedWeek,
-          value: `${predictedWeek} ${locale.currency}`,
+          value: `${formatCurrency(predictedWeek)} грн`,
         },
         {
           label: locale.predictedMonth,
-          value: `${predictedMonth} ${locale.currency}`,
+          value: `${formatCurrency(predictedMonth)} грн`,
         },
       ],
     },

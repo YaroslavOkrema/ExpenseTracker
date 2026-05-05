@@ -4,7 +4,8 @@ import { Data } from '@/types/types.ts'
 import { useMASettings } from '@/hooks/useMASettings.ts'
 
 export function useExpensesTrendChart(transactions: Data[]) {
-  const daily = getDailyExpenses(transactions)
+  // Generate 30 days of continuous data for the trend chart
+  const daily = getDailyExpenses(transactions, 30)
   const expenses = daily.map(d => d.expense)
 
   const { mode, setMode } = useMASettings()

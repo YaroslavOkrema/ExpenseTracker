@@ -39,11 +39,14 @@ export const useFinancialMetrics = (transactions: Data[]) => {
         const monthlyIncome = calculateIncome(monthly)
         const monthlyExpenses = calculateExpense(monthly)
 
-        const daily = getDailyExpenses(transactions)
-        const dailyValues = daily.map(d => d.expense)
+        const daily7 = getDailyExpenses(transactions, 7)
+        const dailyValues7 = daily7.map(d => d.expense)
 
-        const ma7 = getMovingAverage(dailyValues, 7, mode)
-        const ma30 = getMovingAverage(dailyValues, 30, mode)
+        const daily30 = getDailyExpenses(transactions, 30)
+        const dailyValues30 = daily30.map(d => d.expense)
+
+        const ma7 = getMovingAverage(dailyValues7, 7, mode)
+        const ma30 = getMovingAverage(dailyValues30, 30, mode)
 
         const avgExpense7 = ma7.length ? ma7[ma7.length - 1] : 0
         const avgExpense30 = ma30.length ? ma30[ma30.length - 1] : 0
