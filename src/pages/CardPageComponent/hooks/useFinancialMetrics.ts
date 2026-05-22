@@ -51,8 +51,9 @@ export const useFinancialMetrics = (transactions: Data[]) => {
         const avgExpense7 = ma7.length ? ma7[ma7.length - 1] : 0
         const avgExpense30 = ma30.length ? ma30[ma30.length - 1] : 0
 
-        const predictedTomorrow = avgExpense7
-        const predictedWeek = avgExpense7 * 7
+        const baseShort = avgExpense7 || avgExpense30
+        const predictedTomorrow = baseShort
+        const predictedWeek = baseShort * 7
         const predictedMonth = avgExpense30 * 30
 
         return {
